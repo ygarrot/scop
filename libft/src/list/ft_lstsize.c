@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 16:19:30 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/17 16:19:31 by tcharrie         ###   ########.fr       */
+/*   Updated: 2019/05/09 13:42:04 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,5 @@
 
 size_t	ft_lstsize(t_list *lst)
 {
-	size_t	i;
-
-	if (!lst)
-		return (0);
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
+	return (lst ? ft_lstsize(lst->next) + 1 : 0);
 }

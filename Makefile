@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/08 14:20:03 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/09 12:18:03 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME = scop
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -g3
-# CFLAGS += -fsanitize=address,undefined
+CFLAGS += -fsanitize=address,undefined
 
 SRCDIR = src
 OBJDIR = obj
@@ -27,6 +27,7 @@ INCDIR =  \
 		  libft/includes
 
 SRC = \
+	  parser.c \
 	  main.c
 
 #Colors
@@ -50,7 +51,7 @@ LIBFT = libft/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCS) $(LIBFT)
 	@echo "$(_CYAN)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
@@ -64,12 +65,12 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 clean:
 	@echo "$(_RED)Removed objects (.o) files.$(_END)"
 	@/bin/rm -rf obj
-	make -C libft clean
+	make -C clean libft
 
 fclean: clean
 	@echo "$(_RED)Removed ($(NAME)).$(_END)"
 	@/bin/rm -f $(NAME)
-	make -C libft fclean
+	make -C fclean libft
 
 re: fclean all
 
