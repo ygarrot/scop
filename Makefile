@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/09 12:18:03 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/10 13:30:50 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ INCDIR =  \
 		  libft/includes
 
 SRC = \
+	  vertex_list.c \
 	  parser.c \
 	  main.c
 
@@ -55,7 +56,6 @@ $(NAME): $(OBJS)
 	@echo "$(_CYAN)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@echo $(INCS)
 	make -C libft
 	@mkdir -p $(ALL_OBJ_DIR) || true
 	@printf "                                                          \r"

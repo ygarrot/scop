@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:44:13 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/09 12:16:49 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/10 13:29:29 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, const char *argv[])
 	int			fd;
 	char		*line;
 
-
+	ft_bzero(&scop, sizeof(scop));
 	if (usage(argc, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if ((fd = open(argv[1], O_RDONLY)) == -1)

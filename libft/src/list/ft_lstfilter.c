@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_lstfilter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 11:00:22 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/10 11:40:34 by ygarrot          ###   ########.fr       */
+/*   Created: 2019/05/10 11:34:33 by ygarrot           #+#    #+#             */
+/*   Updated: 2019/05/10 12:04:48 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+t_list	*ft_lstfilter(t_list *lst, void * struc, t_list *(*f)(t_list *elem, void *struc))
 {
-	t_list *maillon;
+	t_list *new_lst;
+	t_list *node;
 
-	if (!(*alst))
-		*alst = new;
-	else
+	if (!lst)
+		return (0);
+	new_lst = NULL;
+	while (lst)
 	{
-		maillon = new;
-		maillon->next = *alst;
-		*alst = maillon;
+		if ((node = f(lst, struc)))
+			ft_lstpushback(&new_lst, node);
+		lst = lst->next;
 	}
+	return (new_lst);
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/04/29 16:21:57 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/10 12:05:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,4 +214,6 @@ int				ft_exit(char *str, int code);
 
 double			ft_std(double *array, int len);
 double			ft_mean(double *array, int len);
+
+t_list	*ft_lstfilter(t_list *lst, void *struc, t_list *(*f)(t_list *elem, void *struc));
 #endif

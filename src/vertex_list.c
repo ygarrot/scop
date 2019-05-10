@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   vertex_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 11:00:22 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/10 11:40:34 by ygarrot          ###   ########.fr       */
+/*   Created: 2019/05/10 12:01:47 by ygarrot           #+#    #+#             */
+/*   Updated: 2019/05/10 13:42:34 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "scop.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+t_list	*get_vertex(t_list *vertices, void *struc)
 {
-	t_list *maillon;
+	t_int_tab	*int_tab;
+	size_t		i;
 
-	if (!(*alst))
-		*alst = new;
-	else
+	i = 0;
+	int_tab = struc;
+	while (i < int_tab->size)
 	{
-		maillon = new;
-		maillon->next = *alst;
-		*alst = maillon;
+		if (((t_vertex*)vertices->content)->index == i)
+			return (vertices);
+		i++;
 	}
+	return (NULL);
 }
