@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:39:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 14:56:50 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/11 15:19:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	parse_mtl(const t_func_dic *dic,
 	if (!strncmp(dic->key, string, ft_strlento(string, ' ')))
 	{
 		dic->func(ft_strsplit(string, ' '), materials);
-		printf("%lf", ((t_material*)(*materials)->content)->Ka.r);
 	}
 	parse_mtl(dic + 1, string, materials);
 }

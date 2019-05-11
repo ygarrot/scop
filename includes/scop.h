@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 14:43:10 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/11 15:13:40 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,41 +93,45 @@ typedef struct	s_material
 }				t_material;
 
 /* parser.c */
-void	parse_obj(const t_func_dic *dic, char *string, t_scop *scop);
-void	iter_obj(char *string, t_scop *scop);
-void	create_vertex(char **value, void *struc);
-t_list	*get_vertex(t_list *vertices, void *struc);
+void		parse_obj(const t_func_dic *dic, char *string, t_scop *scop);
+void		iter_obj(char *string, t_scop *scop);
+void		create_vertex(char **value, void *struc);
+t_list		*get_vertex(t_list *vertices, void *struc);
 
 
 /* mtl_parser.c */
 
-void	string_to_double(char **string,
+void		string_to_double(char **string,
 						double *to_fill);
 t_material	*as_material(void *ptr);
-int		string_to_color(char **string,
+int			string_to_color(char **string,
 			 			t_color *to_fill,
 					   	int color_needed);
 t_list		*file_to_materials(char *filename);
-void	create_new_material(char **tab, void *struc);
-void	set_ambiant_color(char **tab, void *struc);
-void iter_mtl(char *string, t_list **materials);
-void	parse_mtl(const t_func_dic *dic, char *string,
+void		iter_mtl(char *string, t_list **materials);
+void		parse_mtl(const t_func_dic *dic, char *string,
 	   	t_list **materials);
 
 /* mtl_set_functions_1.c */
 
-void	set_illum(char **tab, void *struc);
-void	set_transparency(char **tab, void *struc);
-void	set_optical_density(char **tab, void *struc);
-void	set_transmission_filter(char **tab, void *struc);
-void	set_emissive_color(char **tab, void *struc);
-void	set_specular_exponent(char **tab, void *struc);
+void		set_illum(char **tab, void *struc);
+void		set_transparency(char **tab, void *struc);
+void		set_optical_density(char **tab, void *struc);
+void		set_transmission_filter(char **tab, void *struc);
+void		set_emissive_color(char **tab, void *struc);
+void		set_specular_exponent(char **tab, void *struc);
 
 /* mtl_set_functions.c */
 
-void	set_specular_color(char **tab, void *struc);
-void	set_diffuse_color(char **tab, void *struc);
-void	set_ambiant_color(char **tab, void *struc);
-void	create_new_material(char **tab, void *struc);
+void		set_specular_color(char **tab, void *struc);
+void		set_diffuse_color(char **tab, void *struc);
+void		set_ambiant_color(char **tab, void *struc);
+void		create_new_material(char **tab, void *struc);
+
+/* mtl_print.c */
+
+void		print_mtl(t_material *material);
+void		print_foreach_mtl(t_list *materials);
+void		print_color(t_color color);
 
 #endif
