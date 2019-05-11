@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 15:13:40 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/11 16:17:36 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,61 +15,6 @@
 
 # include <math.h>
 # include "../libft/includes/libft.h"
-
-typedef struct	s_func_dic
-{
-	char		*key;
-	void		(*func)(char **, void *);
-}				t_func_dic;
-
-typedef struct	s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-	double	w;
-}				t_vector;
-
-typedef struct	s_vertex
-{
-	t_vector	v;
-	char		*name;
-	char		*usemtl;
-	size_t		index;
-}				t_vertex;
-
-typedef enum	token
-{
-	VERTEX
-	
-}				t_token;
-
-typedef struct	s_lexer_token
-{
-	char	*key;
-	int		value;
-}				t_lexer_token;
-
-typedef struct s_face
-{
-	t_list	*vertices;
-}				t_face;
-
-typedef struct	s_scop
-{
-	t_list	*vertices;
-	t_list	*polygon;
-	t_list	*materials;
-	char	*name;
-	int		smoothing_group;
-	int		vertices_nb;
-}				t_scop;
-
-typedef struct s_int_tab
-{
-	int		*tab;
-	size_t	size;
-}				t_int_tab;
 
 typedef struct s_color
 {
@@ -91,6 +36,63 @@ typedef struct	s_material
 	double		d;		//transparency // disolve
 	double		illum;	//color params;
 }				t_material;
+
+typedef struct	s_func_dic
+{
+	char		*key;
+	void		(*func)(char **, void *);
+}				t_func_dic;
+
+typedef struct	s_vector
+{
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+}				t_vector;
+
+typedef struct	s_vertex
+{
+	t_vector	v;
+	char		*name;
+	size_t		index;
+}				t_vertex;
+
+typedef enum	token
+{
+	VERTEX
+	
+}				t_token;
+
+typedef struct	s_lexer_token
+{
+	char	*key;
+	int		value;
+}				t_lexer_token;
+
+typedef struct s_face
+{
+	t_list		*vertices;
+	t_material	*material;
+	int			smoothing_group;
+}				t_face;
+
+typedef struct	s_scop
+{
+	t_list		*vertices;
+	t_list		*polygon;
+	t_list		*materials;
+	t_material	*current_material;
+	char		*name;
+	int			smoothing_group;
+	int			vertices_nb;
+}				t_scop;
+
+typedef struct s_int_tab
+{
+	int		*tab;
+	size_t	size;
+}				t_int_tab;
 
 /* parser.c */
 void		parse_obj(const t_func_dic *dic, char *string, t_scop *scop);

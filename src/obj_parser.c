@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:39:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 12:27:56 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/11 16:22:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,29 @@ void	string_to_int_tab(char **split, t_int_tab *int_tab)
 	}
 }
 
+t_list *get_material_by_name(t_list *material, void *str)
+{
+	return (!ft_strcmp(((t_material*)material)->name, (char*)str) ? material : 0);
+}
+
+void	use_material(char **split, void *struc)
+{
+	t_scop		*scop;
+	t_list		*tmp;
+	
+	scop = struc;
+	(void)split;
+	(void)tmp;
+	tmp = ft_lstfilter(scop->vertices, split[1], &get_material_by_name);
+	if (tmp)
+		scop->current_material = (t_material*)tmp->content;
+}
+
+void	set_smoothing_group(char **split, void *struc)
+{
+	((t_scop*)struc)->smoothing_group = atof(split[1]);
+}
+
 void	create_materials(char **split, void *struc)
 {
 	t_scop		*scop;
@@ -79,6 +102,8 @@ void	create_polygon(char **split, void *struc)
 		.vertices = ft_lstfilter(scop->vertices,
 								&vertex_indices,
 								&get_vertex),
+		.material = scop->current_material,
+		.smoothing_group = scop->smoothing_group,
 	};
 	block = ft_lstnew(&polygon, sizeof(*polygon));
 	if (!block)
@@ -92,6 +117,8 @@ void iter_obj(char *string, t_scop *scop)
 	{
 		{"v", &create_vertex},
 		{"f", &create_polygon},
+		{"s", &set_smoothing_group},
+		{"usemtl", &use_material},
 		{"mtllib", &create_materials},
 		{0, 0},
 	};
@@ -103,7 +130,7 @@ void	parse_obj(const t_func_dic *dic, char *string, t_scop *scop)
 {
 	if (!dic || !dic->key)
 		return ;
-	if (!strncmp(dic->key, string,ft_strlento(string, ' ')))
+	if (!strncmp(dic->key, string, ft_strlento(string, ' ')))
 		dic->func(ft_strsplit(string, ' '), scop);
 	parse_obj(dic + 1, string, scop);
 }

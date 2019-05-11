@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/11 15:15:01 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/11 16:18:16 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC = \
 	  mtl_set_functions_1.c \
 	  mtl_print.c \
 	  mtl_parser.c \
-	  parser.c \
+	  obj_parser.c \
 	  main.c
 
 #Colors
