@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/11 12:44:14 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/11 14:59:21 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ INCDIR =  \
 
 SRC = \
 	  vertex_list.c \
+	  mtl_set_functions.c \
+	  mtl_set_functions_1.c \
 	  mtl_parser.c \
 	  parser.c \
 	  main.c

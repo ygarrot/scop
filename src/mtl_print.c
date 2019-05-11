@@ -1,0 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtl_print.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/11 15:00:14 by ygarrot           #+#    #+#             */
+/*   Updated: 2019/05/11 15:10:52 by ygarrot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "scop.h"
+
+void	print_color(t_color color)
+{
+	printf("red: %lf green: %lf blue: %lf",
+			color.r,
+			color.g,
+			color.b
+		  );
+}
+
+void	print_mtl(t_material *material)
+{
+	printf("%s", material->name);
+	printf("ambiant_color: ");
+	print_color(material->Ka);
+	printf("diffuse_color: ");
+	print_color(material->Kd);
+	printf("specular_color: ");
+	print_color(material->Ks);
+	printf("specular_exponent: ");
+	print_color(material->Ns);
+	printf("emissive_color: ");
+	print_color(material->Ke);
+	printf("transmission_filter: ");
+	print_color(material->Tf);
+	printf("optical_density: %lf transparency: %lf illum: %lf\n",
+			material->Ni,
+			material->d,
+			material->illum);
+}
+
+void	print_foreach_mtl(t_list *materials)
+{
+	t_list	*current;
+
+	current = materials;
+	while (current)
+	{
+		print_mtl((t_material*)current->content);
+		current = current->next;
+	}
+}

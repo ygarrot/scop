@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 12:27:43 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/11 14:43:10 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct	s_material
 {
 	char		*name;
 	t_color		Ka;		//ambiant_color;
-	t_color		Kd;		//diffure_color;
+	t_color		Kd;		//diffuse_color;
 	t_color		Ks;		//specular_color;
 	t_color		Ns;		//specular exponent
 	t_color		Ke;		//emissive_color;
@@ -100,6 +100,10 @@ t_list	*get_vertex(t_list *vertices, void *struc);
 
 
 /* mtl_parser.c */
+
+void	string_to_double(char **string,
+						double *to_fill);
+t_material	*as_material(void *ptr);
 int		string_to_color(char **string,
 			 			t_color *to_fill,
 					   	int color_needed);
@@ -109,4 +113,21 @@ void	set_ambiant_color(char **tab, void *struc);
 void iter_mtl(char *string, t_list **materials);
 void	parse_mtl(const t_func_dic *dic, char *string,
 	   	t_list **materials);
+
+/* mtl_set_functions_1.c */
+
+void	set_illum(char **tab, void *struc);
+void	set_transparency(char **tab, void *struc);
+void	set_optical_density(char **tab, void *struc);
+void	set_transmission_filter(char **tab, void *struc);
+void	set_emissive_color(char **tab, void *struc);
+void	set_specular_exponent(char **tab, void *struc);
+
+/* mtl_set_functions.c */
+
+void	set_specular_color(char **tab, void *struc);
+void	set_diffuse_color(char **tab, void *struc);
+void	set_ambiant_color(char **tab, void *struc);
+void	create_new_material(char **tab, void *struc);
+
 #endif

@@ -6,46 +6,41 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:39:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 12:54:09 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/11 14:56:50 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
+void	string_to_double(char **string,
+						double *to_fill)
+{
+	*to_fill = atof(string[1]);
+}
+
+t_material	*as_material(void *ptr)
+{
+	return ((t_material*)(*(t_list**)ptr)->content);
+}
+
 int		string_to_color(char **string,
 			 			t_color *to_fill,
-					   	int color_needed)
+						int color_needed)
 {
+	t_color	tmp;
 	int		argc;
 
 	argc = ft_tablen(string);
 	if (!string || argc < color_needed)
 		return (0);
-	to_fill = &(t_color)
+	tmp = (t_color)
 	{
-		.r = argc > 0 ? atof(string[0]) : 0.0,
-		.g = argc > 1 ? atof(string[0]) : 0.0,
-		.b = argc > 2 ? atof(string[0]) : 0.0,
+		.r = argc > 0 ? atof(string[1]) : 0.0,
+		.g = argc > 1 ? atof(string[2]) : 0.0,
+		.b = argc > 2 ? atof(string[3]) : 0.0,
 	};
+	ft_memcpy(to_fill, &tmp, sizeof(t_color));
 	return (1);
-}
-
-void	create_new_material(char **tab, void *struc)
-{
-	t_material	tmp;
-
-	ft_printf("filet_o\n");
-	tmp = (t_material)
-	{
-		.name = tab[1],
-	};
-	ft_lstadd((t_list**)struc, ft_lstnew(&tmp, sizeof(t_material)));
-}
-
-void	set_ambiant_color(char **tab, void *struc)
-{
-	string_to_color(tab,
-		   	&((t_material*)(*(t_list**)struc)->content)->Ka, 3);
 }
 
 void iter_mtl(char *string, t_list **materials)
@@ -53,6 +48,14 @@ void iter_mtl(char *string, t_list **materials)
 	const t_func_dic parse_dic[] =
 	{
 		{"Ka", &set_ambiant_color},
+		{"Kd", &set_diffuse_color},
+		{"Ks", &set_specular_color},
+		{"Ns", &set_specular_exponent},
+		{"ke", &set_emissive_color},
+		{"Tf", &set_transmission_filter},
+		{"Ni", &set_optical_density},
+		{"d", &set_transparency},
+		{"illum", &set_illum},
 		{"newmtl", &create_new_material},
 		{0, 0},
 	};
@@ -64,10 +67,13 @@ void	parse_mtl(const t_func_dic *dic,
 					char *string,
 					t_list **materials)
 {
-	if (!dic || !dic->key)
+	if (!*string || !dic || !dic->key)
 		return ;
 	if (!strncmp(dic->key, string, ft_strlento(string, ' ')))
+	{
 		dic->func(ft_strsplit(string, ' '), materials);
+		printf("%lf", ((t_material*)(*materials)->content)->Ka.r);
+	}
 	parse_mtl(dic + 1, string, materials);
 }
 
