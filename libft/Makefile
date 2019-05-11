@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/10 11:48:16 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/10 16:19:21 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -242,8 +242,5 @@ fclean: clean
 	@echo "$(_RED)Removed library ($(NAME)).$(_END)"
 	@/bin/rm -f $(NAME)
 
-re:
-	make fclean
-	make all
-
+re: fclean all
 

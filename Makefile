@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/10 13:30:50 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/11 12:44:14 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ INCDIR =  \
 
 SRC = \
 	  vertex_list.c \
+	  mtl_parser.c \
 	  parser.c \
 	  main.c
 
@@ -52,11 +53,11 @@ LIBFT = libft/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	make -C libft
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCS) $(LIBFT)
 	@echo "$(_CYAN)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	make -C libft
 	@mkdir -p $(ALL_OBJ_DIR) || true
 	@printf "                                                          \r"
 	@printf "$(_CYAN)Compiling $@$(_END)\r"
@@ -65,12 +66,12 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 clean:
 	@echo "$(_RED)Removed objects (.o) files.$(_END)"
 	@/bin/rm -rf obj
-	make -C clean libft
+	make clean -C libft
 
 fclean: clean
 	@echo "$(_RED)Removed ($(NAME)).$(_END)"
 	@/bin/rm -f $(NAME)
-	make -C fclean libft
+	make fclean -C libft
 
-re: fclean all
-
+re: fclean
+	make all
