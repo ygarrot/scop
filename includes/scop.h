@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/12 11:59:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/12 16:11:37 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SCOP_H
 
 # include <math.h>
+#include </Users/ygarrot/.brew/Cellar/glfw/3.3/include/GLFW/glfw3.h>
 # include "../libft/includes/libft.h"
 
 typedef struct s_color
@@ -45,18 +46,38 @@ typedef struct	s_func_dic
 
 typedef struct	s_vector
 {
-	double	x;
-	double	y;
-	double	z;
-	double	w;
+	GLfloat	x;
+	GLfloat	y;
+	GLfloat	z;
+	/* double	w; */
 }				t_vector;
 
+typedef struct s_vector_array
+{
+	t_vector	*vector;
+	size_t	size;
+}				t_vector_array;
+/* struct Vertex */
+/* { */
+/* 	  GLfloat position[3]; */
+/* 	    GLfloat normal[3]; */
+/* 		  Glubyte color[4]; */
+/* }; */
+ 
+/* Vertex vertices[VERTEX_COUNT]; */
 typedef struct	s_vertex
 {
-	t_vector	v;
-	char		*name;
-	size_t		index;
+	t_vector	position;
+	t_vector	normal;
+	t_vector	textures;
 }				t_vertex;
+
+typedef struct s_vertex_array
+{
+	t_vertex	*vertices;
+	size_t	size;
+}				t_vertex_array;
+
 
 typedef enum	token
 {
@@ -72,14 +93,17 @@ typedef struct	s_lexer_token
 
 typedef struct s_face
 {
-	t_list		*vertices;
+	t_vertex_array	vertices;
 	t_material	*material;
 	int			smoothing_group;
 }				t_face;
 
 typedef struct	s_scop
 {
-	t_list		*vertices;
+	t_vector_array	vertices;
+	t_vector_array	normals;
+	t_vector_array	textures;
+	/* t_list		*vertices; */
 	t_list		*polygons;
 	t_list		*materials;
 	t_material	*current_material;
@@ -87,7 +111,6 @@ typedef struct	s_scop
 	int			smoothing_group;
 	int			vertices_nb;
 }				t_scop;
-
 typedef struct s_int_tab
 {
 	int		*tab;
@@ -108,7 +131,7 @@ t_list *get_material_by_name(t_list *material, void *str);
 /* obj_parser.c */
 
 void		parse_obj(const t_func_dic *dic,
-						char *string, t_scop *scop);
+		char *string, t_scop *scop);
 void		iter_obj(char *string, t_scop *scop);
 void		string_to_int_tab(char **split, t_int_tab *int_tab);
 
@@ -134,15 +157,15 @@ void	print_vertex(t_vertex	*vertex);
 /* mtl_parser.c */
 
 void		string_to_double(char **string,
-							double *to_fill);
+		double *to_fill);
 t_material	*as_material(void *ptr);
 int			string_to_color(char **string,
-							t_color *to_fill,
-							int color_needed);
+		t_color *to_fill,
+		int color_needed);
 t_list		*file_to_materials(char *filename);
 void		iter_mtl(char *string, t_list **materials);
 void		parse_mtl(const t_func_dic *dic, char *string,
-					t_list **materials);
+		t_list **materials);
 
 
 /* mtl_set_functions_1.c */

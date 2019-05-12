@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 15:00:14 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/12 12:03:01 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/12 13:11:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_mtl(t_material *material)
 {
 	if (!material)
 		return ;
-	printf("%s:\n", material->name);
+	printf("[ %s ]\n", material->name);
 	printf("ambiant_color:\n");
 	print_color(material->Ka);
 	printf("diffuse_color:\n");

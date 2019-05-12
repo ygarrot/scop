@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:27:39 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/12 13:04:54 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/12 16:12:57 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,24 @@
 
 void	create_vertex(char **split, void *struc)
 {
-	t_vertex	tmp;
+	t_vector	tmp;
 	t_scop		*scop;
 	t_list		*block;
 
 	scop = struc;
 	if (ft_tablen(split) < 4)
 		ft_exit("vertex < 3", 1);
-	tmp = (t_vertex)
+	tmp = (t_vector)
 	{
-		.v =
-	   	{
 			.x = atof(split[1]),
 			.y = atof(split[1]),
 			.z = atof(split[1]),
-			.w = (ft_tablen(split) > 4) ? atof(split[1]) : 1.0
-		},
-		.index = scop->vertices_nb++
+			/* .w = (ft_tablen(split) > 4) ? atof(split[1]) : 1.0 */
 	};
 	block = ft_lstnew(&tmp, sizeof(t_vertex));
 	if (!block)
 		ft_exit("BAD ALLOC", EXIT_FAILURE);
-	ft_lstadd(&scop->vertices, block);
+	/* ft_lstadd(&scop->vertices, block); */
 }
 
 void	use_material(char **split, void *struc)
@@ -44,7 +40,7 @@ void	use_material(char **split, void *struc)
 	t_list		*tmp;
 	
 	scop = struc;
-	tmp = ft_lstfilter(scop->vertices, split[1], &get_material_by_name);
+	tmp = ft_lstfilter(scop->materials, split[1], &get_material_by_name);
 	if (tmp)
 		scop->current_material = (t_material*)tmp->content;
 }
@@ -73,9 +69,7 @@ void	create_polygon(char **split, void *struc)
 	string_to_int_tab(split, &vertex_indices);
 	polygon = (t_face)
 	{
-		.vertices = ft_lstfilter(scop->vertices,
-								&vertex_indices,
-								&get_vertex),
+		.vertices = {.size = 0, .vertices = 0},
 		.material = scop->current_material,
 		.smoothing_group = scop->smoothing_group,
 	};
