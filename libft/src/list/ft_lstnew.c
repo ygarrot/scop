@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 18:08:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/09 13:29:34 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/12 12:42:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 
 	maillon = (t_list*)ft_memalloc(sizeof(t_list));
 	if (!maillon || !content)
-		return (maillon);
-	maillon->content = (t_list*)malloc(content_size);
+		return (NULL);
+	maillon->content = malloc(content_size);
 	if (!maillon->content)
 	{
 		ft_memdel((void**)&maillon);

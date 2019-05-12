@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 16:17:36 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/12 11:59:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct	s_vertex
 typedef enum	token
 {
 	VERTEX
-	
+
 }				t_token;
 
 typedef struct	s_lexer_token
@@ -80,7 +80,7 @@ typedef struct s_face
 typedef struct	s_scop
 {
 	t_list		*vertices;
-	t_list		*polygon;
+	t_list		*polygons;
 	t_list		*materials;
 	t_material	*current_material;
 	char		*name;
@@ -94,25 +94,56 @@ typedef struct s_int_tab
 	size_t	size;
 }				t_int_tab;
 
-/* parser.c */
-void		parse_obj(const t_func_dic *dic, char *string, t_scop *scop);
-void		iter_obj(char *string, t_scop *scop);
-void		create_vertex(char **value, void *struc);
+
+/* vertex_list.c */
+
 t_list		*get_vertex(t_list *vertices, void *struc);
+
+
+/* tlist_functions.c */
+
+t_list *get_material_by_name(t_list *material, void *str);
+
+
+/* obj_parser.c */
+
+void		parse_obj(const t_func_dic *dic,
+						char *string, t_scop *scop);
+void		iter_obj(char *string, t_scop *scop);
+void		string_to_int_tab(char **split, t_int_tab *int_tab);
+
+
+/* obj_set_functions.c */
+
+void		use_material(char **split, void *struc);
+void		create_polygon(char **split, void *struc);
+void		set_smoothing_group(char **split, void *struc);
+void		create_vertex(char **value, void *struc);
+void		create_materials(char **split, void *struc);
+
+
+/* obj_print.c */
+
+void	print_obj(t_scop *scop);
+void	print_faces(t_list *face);
+void	print_face(t_face *face);
+void	print_vertices(t_list *vertex);
+void	print_vertex(t_vertex	*vertex);
 
 
 /* mtl_parser.c */
 
 void		string_to_double(char **string,
-						double *to_fill);
+							double *to_fill);
 t_material	*as_material(void *ptr);
 int			string_to_color(char **string,
-			 			t_color *to_fill,
-					   	int color_needed);
+							t_color *to_fill,
+							int color_needed);
 t_list		*file_to_materials(char *filename);
 void		iter_mtl(char *string, t_list **materials);
 void		parse_mtl(const t_func_dic *dic, char *string,
-	   	t_list **materials);
+					t_list **materials);
+
 
 /* mtl_set_functions_1.c */
 
@@ -123,6 +154,7 @@ void		set_transmission_filter(char **tab, void *struc);
 void		set_emissive_color(char **tab, void *struc);
 void		set_specular_exponent(char **tab, void *struc);
 
+
 /* mtl_set_functions.c */
 
 void		set_specular_color(char **tab, void *struc);
@@ -130,10 +162,11 @@ void		set_diffuse_color(char **tab, void *struc);
 void		set_ambiant_color(char **tab, void *struc);
 void		create_new_material(char **tab, void *struc);
 
+
 /* mtl_print.c */
 
+void		print_mtls(t_list *material);
 void		print_mtl(t_material *material);
-void		print_foreach_mtl(t_list *materials);
 void		print_color(t_color color);
 
 #endif

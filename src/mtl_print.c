@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 15:00:14 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 15:18:28 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/12 12:03:01 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	print_color(t_color color)
 
 void	print_mtl(t_material *material)
 {
+	if (!material)
+		return ;
 	printf("%s:\n", material->name);
 	printf("ambiant_color:\n");
 	print_color(material->Ka);
@@ -44,14 +46,7 @@ void	print_mtl(t_material *material)
 			material->illum);
 }
 
-void	print_foreach_mtl(t_list *materials)
+void	print_mtls(t_list *material)
 {
-	t_list	*current;
-
-	current = materials;
-	while (current)
-	{
-		print_mtl((t_material*)current->content);
-		current = current->next;
-	}
+	print_mtl((t_material*)material->content);
 }

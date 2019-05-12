@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:44:13 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 15:14:35 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/12 12:02:44 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		usage(int argc, const char *argv[])
 
 int main(int argc, const char *argv[])
 {
-	/* t_vertex	v; */
 	t_scop		scop;
 	int			fd;
 	char		*line;
@@ -40,6 +39,6 @@ int main(int argc, const char *argv[])
 	{
 		iter_obj(line, &scop);
 	}
-	print_foreach_mtl(scop.materials);
+	print_obj(&scop);
 	return (0);
 }
