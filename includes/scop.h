@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 11:37:33 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 12:10:58 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,4 +207,6 @@ void		print_mtls(t_list *material);
 void		print_mtl(t_material *material);
 void		print_color(t_color color);
 
+/* draw.c */
+int			draw(t_scop *scop);
 #endif

@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/13 11:55:19 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/13 12:15:58 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,24 +20,33 @@ CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -g3
 CFLAGS += -fsanitize=address,undefined
 
+FRAMEWORK += -framework OpenGL \
+-framework CoreVideo \
+-framework IOKit \
+-framework Cocoa \
+-framework Carbon
+
+
 SRCDIR = src
 OBJDIR = obj
 INCDIR =  \
+		  Users/ygarrot/.brew/Cellar/glfw/3.3/include \
 		  includes \
 		  libft/includes
 
 SRC = \
-list/tlist_functions.c\
-list/vertex_list.c\
-main.c\
-parser/mtl_parser.c\
-parser/mtl_set_functions.c\
-parser/mtl_set_functions_1.c\
-parser/obj_parser.c\
-parser/obj_set_functions.c\
-parser/obj_set_functions_1.c\
-print/mtl_print.c\
-print/obj_print.c
+	  list/tlist_functions.c\
+	  list/vertex_list.c\
+	  main.c\
+	  draw.c\
+	  parser/mtl_parser.c\
+	  parser/mtl_set_functions.c\
+	  parser/mtl_set_functions_1.c\
+	  parser/obj_parser.c\
+	  parser/obj_set_functions.c\
+	  parser/obj_set_functions_1.c\
+	  print/mtl_print.c\
+	  print/obj_print.c
 
 #Colors
 
@@ -55,13 +64,14 @@ OBJS = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(SRC))))
 ALL_OBJ_DIR = $(sort $(dir $(OBJS)))
 INCS = $(addprefix -I, $(addsuffix /, $(INCDIR)))
 
-LIBFT = libft/libft.a
+LIBFT = libft/libft.a ~/.brew/lib/libglfw3.a
+
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCS) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(FRAMEWORK) -I $(INCS) $(LIBFT)
 	@echo "$(_CYAN)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

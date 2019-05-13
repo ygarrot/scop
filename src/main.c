@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:44:13 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/12 12:02:44 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 12:11:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int main(int argc, const char *argv[])
 		iter_obj(line, &scop);
 	}
 	print_obj(&scop);
+	draw(&scop);
 	return (0);
 }
