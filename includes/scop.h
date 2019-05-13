@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/12 16:11:37 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 11:37:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,24 @@ typedef struct s_face
 
 typedef struct	s_scop
 {
-	t_vector_array	vertices;
+	t_vector_array	positions;
 	t_vector_array	normals;
 	t_vector_array	textures;
-	/* t_list		*vertices; */
+
+	t_list		*position_list;
+	t_list		*normal_list;
+	t_list		*texture_list;
+
 	t_list		*polygons;
 	t_list		*materials;
+
 	t_material	*current_material;
+
 	char		*name;
 	int			smoothing_group;
 	int			vertices_nb;
 }				t_scop;
+
 typedef struct s_int_tab
 {
 	int		*tab;
@@ -121,6 +128,9 @@ typedef struct s_int_tab
 /* vertex_list.c */
 
 t_list		*get_vertex(t_list *vertices, void *struc);
+void	array_to_vertices(char **string,
+		t_vertex_array *to_fill,
+		t_scop *scop);
 
 
 /* tlist_functions.c */
@@ -136,13 +146,18 @@ void		iter_obj(char *string, t_scop *scop);
 void		string_to_int_tab(char **split, t_int_tab *int_tab);
 
 
+/* obj_set_functions1.c */
+void	create_materials(char **split, void *struc);
+void	set_smoothing_group(char **split, void *struc);
+void	add_texture(char **split, void *struc);
+void	add_normal(char **split, void *struc);
+void	add_position(char **split, void *struc);
+
 /* obj_set_functions.c */
 
 void		use_material(char **split, void *struc);
 void		create_polygon(char **split, void *struc);
-void		set_smoothing_group(char **split, void *struc);
-void		create_vertex(char **value, void *struc);
-void		create_materials(char **split, void *struc);
+void		create_vector(char **value, t_list **stack);
 
 
 /* obj_print.c */

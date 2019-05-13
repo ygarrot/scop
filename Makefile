@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/12 12:00:50 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/13 11:31:33 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC = \
 	  mtl_parser.c \
 	  obj_parser.c \
 	  obj_set_functions.c \
+	  obj_set_functions_1.c \
 	  obj_print.c\
 	  main.c
 

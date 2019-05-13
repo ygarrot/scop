@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:39:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/12 11:35:48 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 11:21:38 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void iter_obj(char *string, t_scop *scop)
 {
 	const t_func_dic parse_dic[] =
 	{
-		{"v", &create_vertex},
+		{"v", &add_position},
+		{"vt", &add_texture},
+		{"vn", &add_normal},
 		{"f", &create_polygon},
 		{"s", &set_smoothing_group},
 		{"usemtl", &use_material},

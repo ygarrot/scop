@@ -6,19 +6,14 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:42:08 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/12 16:07:44 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 11:37:35 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	print_vertex(t_vertex	*vertex)
+void	print_vector3(t_vector const vector)
 {
-	t_vector	vector;
-
-	if (!vertex)
-		return ;
-	vector = vertex->position;
 	printf("\t\tx: % 2.4lf y: % 2.4lf z:% 2.4lf w:% 2.4lf\n",
 			vector.x,
 			vector.y,
@@ -26,16 +21,52 @@ void	print_vertex(t_vertex	*vertex)
 			0.0);
 }
 
+void	print_vertex(t_vertex	*vertex)
+{
+	if (!vertex)
+		return ;
+	printf("\t position: ");
+	print_vector3(vertex->position);
+	printf("\t normal: ");
+	print_vector3(vertex->normal);
+	printf("\t texture: ");
+	print_vector3(vertex->textures);
+}
+
 void	print_vertices(t_list *vertex)
 {
 	print_vertex((t_vertex*)vertex->content);
+}
+
+void	print_vector_array(t_vector_array const array)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < array.size)
+	{
+		print_vector3(array.vector[i]);
+		++i;
+	}
+}
+
+void	print_vertex_array(t_vertex_array const array)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < array.size)
+	{
+		print_vertex(&array.vertices[i]);
+		++i;
+	}
 }
 
 void	print_face(t_face *face)
 {
 	if (!face)
 		return ;
-	/* ft_lstiter(face->vertices, &print_vertices); */
+	print_vertex_array(face->vertices);
 	print_mtl(face->material);
 }
 
@@ -47,7 +78,9 @@ void	print_faces(t_list *face)
 void	print_obj(t_scop *scop)
 {
 	printf("Vertices:\n");
-	/* ft_lstiter(scop->vertices, &print_vertices); */
+	print_vector_array(scop->positions);
+	print_vector_array(scop->normals);
+	print_vector_array(scop->textures);
 	printf("Polygons:\n");
 	ft_lstiter(scop->polygons, &print_faces);
 	printf("Materials:\n");

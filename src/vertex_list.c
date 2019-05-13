@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 12:01:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/12 16:15:05 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 11:29:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ t_vector	get_vector(t_vector_array const tab, size_t index)
 }
 
 void	array_to_vertices(char **string,
-	   	t_vertex_array *to_fill,
-	   	t_scop *scop)
+		t_vertex_array *to_fill,
+		t_scop *scop)
 {
 	size_t	elements_nb;
 	size_t	i;
@@ -83,11 +83,18 @@ void	array_to_vertices(char **string,
 	to_fill->size = elements_nb;
 	to_fill->vertices = ft_memalloc(elements_nb * sizeof(t_vertex));
 	i = 0;
+	if (!scop->positions.size)
+	{
+		list_to_vector_array(scop->position_list, &scop->positions);
+		list_to_vector_array(scop->normal_list, &scop->normals);
+		list_to_vector_array(scop->texture_list, &scop->textures);
+	}
 	while (i < elements_nb)
 	{
 		string_to_index(string[i], tab);
-		to_fill->vertices[i].position = get_vector(scop->vertices, tab[0]);
-		to_fill->vertices[i].normal = scop->normals.vector[1];
-		to_fill->vertices[i].textures = scop->textures.vector[2];
+		to_fill->vertices[i].position = get_vector(scop->positions, tab[0]);
+		to_fill->vertices[i].normal = get_vector(scop->normals, tab[1]);
+		to_fill->vertices[i].textures = get_vector(scop->textures, tab[2]);
+		++i;
 	}
 }
