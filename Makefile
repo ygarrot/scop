@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/13 12:15:58 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/13 13:12:26 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ FRAMEWORK += -framework OpenGL \
 SRCDIR = src
 OBJDIR = obj
 INCDIR =  \
+		  Users/ygarrot/.brew/Cellar/glew/2.1.0/include/GL \
 		  Users/ygarrot/.brew/Cellar/glfw/3.3/include \
 		  includes \
 		  libft/includes
@@ -64,7 +65,7 @@ OBJS = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(SRC))))
 ALL_OBJ_DIR = $(sort $(dir $(OBJS)))
 INCS = $(addprefix -I, $(addsuffix /, $(INCDIR)))
 
-LIBFT = libft/libft.a ~/.brew/lib/libglfw3.a
+LIBFT = libft/libft.a ~/.brew/lib/libglfw3.a ~/.brew/lib/libGLEW.a
 
 
 all: $(NAME)

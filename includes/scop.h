@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 12:10:58 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 13:08:47 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define SCOP_H
 
 # include <math.h>
-#include </Users/ygarrot/.brew/Cellar/glfw/3.3/include/GLFW/glfw3.h>
+# include </Users/ygarrot/.brew/Cellar/glew/2.1.0/include/GL/glew.h>
+# define GLFW_DLL
+# include </Users/ygarrot/.brew/Cellar/glfw/3.3/include/GLFW/glfw3.h>
 # include "../libft/includes/libft.h"
 
 typedef struct s_color

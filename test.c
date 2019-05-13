@@ -28,7 +28,7 @@ int main(void)
 	glfwSetKeyCallback(window, key_callback);
 	
 	/* float vertices[] = {-0.5, -0.5, -1.0,   0.0, 0.5, -1.0,   0.5, -0.5, -1.0}; */
-	t_vector tmp = {.x = 2 ,.y =2 ,.z=2 } ;
+	/* t_vector tmp = {.x = 2 ,.y =2 ,.z=2 } ; */
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -41,7 +41,6 @@ int main(void)
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, &tmp);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
