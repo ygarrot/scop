@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:27:39 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 11:23:10 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 11:45:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	create_polygon(char **split, void *struc)
 	string_to_int_tab(split, &vertex_indices);
 	polygon = (t_face)
 	{
-		/* .vertices = {.size = 0, .vertices = 0}, */
 		.material = scop->current_material,
 		.smoothing_group = scop->smoothing_group,
 	};

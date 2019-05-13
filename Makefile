@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/13 11:31:33 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/05/13 11:55:19 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,17 +27,17 @@ INCDIR =  \
 		  libft/includes
 
 SRC = \
-	  tlist_functions.c \
-	  vertex_list.c \
-	  mtl_set_functions.c \
-	  mtl_set_functions_1.c \
-	  mtl_print.c \
-	  mtl_parser.c \
-	  obj_parser.c \
-	  obj_set_functions.c \
-	  obj_set_functions_1.c \
-	  obj_print.c\
-	  main.c
+list/tlist_functions.c\
+list/vertex_list.c\
+main.c\
+parser/mtl_parser.c\
+parser/mtl_set_functions.c\
+parser/mtl_set_functions_1.c\
+parser/obj_parser.c\
+parser/obj_set_functions.c\
+parser/obj_set_functions_1.c\
+print/mtl_print.c\
+print/obj_print.c
 
 #Colors
 

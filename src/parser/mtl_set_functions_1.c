@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:23:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/11 14:59:12 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 11:45:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ void	set_illum(char **tab, void *struc)
 {
 	string_to_double(tab, &as_material(struc)->illum);
 }
-
