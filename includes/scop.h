@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 13:08:47 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 16:21:52 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct	s_scop
 	char		*name;
 	int			smoothing_group;
 	int			vertices_nb;
+	size_t pos_nb;
 }				t_scop;
 
 typedef struct s_int_tab
@@ -210,5 +211,7 @@ void		print_mtl(t_material *material);
 void		print_color(t_color color);
 
 /* draw.c */
+t_vector	*get_all_polygon(t_list *polygons);
+t_vector	*get_position(t_vertex_array *array);
 int			draw(t_scop *scop);
 #endif

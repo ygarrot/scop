@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 12:01:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 11:29:16 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 16:28:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,52 @@ t_list	*get_vertex(t_list *vertex, void *struc)
 	/* 	i++; */
 	/* } */
 	/* return (NULL); */
+}
+
+t_vector	*get_position(t_vertex_array *array)
+{
+	t_vector	*ret;
+	size_t		i;
+
+	i = 0;
+	ret = (t_vector*)ft_memalloc(sizeof(t_vector) * array->size);
+	while (i < array->size)
+	{
+		ret[i] = array->vertices[i].position;
+		++i;
+	}
+	return ret;
+}
+
+t_vector	*get_all_polygon(t_list *polygons)
+{
+	t_vector *ret;
+	size_t	i;
+	size_t total;
+
+	t_list *tmp = polygons;
+	total = 0;
+	while (tmp)
+	{
+		total += ((t_face*)tmp->content)->vertices.size;
+		tmp = tmp->next;
+	}
+	ret = (t_vector*)ft_memalloc(sizeof(t_vector) * total);
+	tmp = polygons;
+	i = 0;
+	while (tmp)
+	{
+		while (i < ((t_face*)tmp->content)->vertices.size)
+		{
+			ret[i] = ((t_face*)tmp->content)->vertices.vertices[i].position;
+			++i;
+			total--;
+	printf("%ld\n", total);
+		}
+		i = 0;
+		tmp = tmp->next;
+	}
+	return ret;
 }
 
 void	list_to_vector_array(t_list *vertex, t_vector_array *to_fill)

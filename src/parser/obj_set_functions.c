@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:27:39 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 11:45:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/13 16:21:48 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	create_polygon(char **split, void *struc)
 	};
 	array_to_vertices(split, &polygon.vertices, scop);
 	block = ft_lstnew(&polygon, sizeof(t_face));
+	scop->pos_nb += polygon.vertices.size;
 	if (!block)
 		ft_exit("BAD ALLOC", EXIT_FAILURE);
 	ft_lstadd(&scop->polygons, block);
