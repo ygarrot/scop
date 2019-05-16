@@ -6,27 +6,28 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:39:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 11:45:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/16 13:49:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	string_to_int_tab(char **split, t_int_tab *int_tab)
+void	string_to_int_tab(char **split, t_array *int_tab)
 {
 	size_t		i;
 
 	i = 1;
 	if (!split)
 		return ;
-	*int_tab = (t_int_tab)
+	*int_tab = (t_array)
 	{
-		.tab = (int*)ft_memalloc((ft_tablen(split) - 1) * sizeof(int)),
+		.content = (int*)ft_memalloc((ft_tablen(split) - 1) * sizeof(int)),
 		.size = ft_tablen(split) - 1,
+		.content_size = sizeof(int),
 	};
 	while (split[i])
 	{
-		int_tab->tab[i - 1] = ft_atoi(split[i]);
+		((int*)int_tab->content)[i - 1] = ft_atoi(split[i]);
 		++i;
 	}
 }

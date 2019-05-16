@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:42:08 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 11:37:35 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/16 12:29:17 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,26 @@ void	print_vertices(t_list *vertex)
 	print_vertex((t_vertex*)vertex->content);
 }
 
-void	print_vector_array(t_vector_array const array)
+void	print_vector_array(t_array const array)
 {
 	size_t		i;
 
 	i = 0;
 	while (i < array.size)
 	{
-		print_vector3(array.vector[i]);
+		print_vector3(((t_vector*)array.content)[i]);
 		++i;
 	}
 }
 
-void	print_vertex_array(t_vertex_array const array)
+void	print_vertex_array(t_array const array)
 {
 	size_t		i;
 
 	i = 0;
 	while (i < array.size)
 	{
-		print_vertex(&array.vertices[i]);
+		print_vertex(&((t_vertex*)array.content)[i]);
 		++i;
 	}
 }

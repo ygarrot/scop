@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 16:21:52 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/16 13:35:19 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,6 @@ typedef struct	s_vector
 	/* double	w; */
 }				t_vector;
 
-typedef struct s_vector_array
-{
-	t_vector	*vector;
-	size_t	size;
-}				t_vector_array;
 /* struct Vertex */
 /* { */
 /* 	  GLfloat position[3]; */
@@ -74,17 +69,16 @@ typedef struct	s_vertex
 	t_vector	textures;
 }				t_vertex;
 
-typedef struct s_vertex_array
+typedef struct s_array
 {
-	t_vertex	*vertices;
+	void	*content;
+	size_t	content_size;
 	size_t	size;
-}				t_vertex_array;
-
+}				t_array;
 
 typedef enum	token
 {
 	VERTEX
-
 }				t_token;
 
 typedef struct	s_lexer_token
@@ -95,16 +89,19 @@ typedef struct	s_lexer_token
 
 typedef struct s_face
 {
-	t_vertex_array	vertices;
-	t_material	*material;
-	int			smoothing_group;
+	t_array			vertices;
+	t_array			indices;
+	t_material		*material;
+	int				smoothing_group;
 }				t_face;
 
 typedef struct	s_scop
 {
-	t_vector_array	positions;
-	t_vector_array	normals;
-	t_vector_array	textures;
+	t_array	positions;
+	t_array	normals;
+	t_array	textures;
+
+	t_array	indices;
 
 	t_list		*position_list;
 	t_list		*normal_list;
@@ -121,18 +118,12 @@ typedef struct	s_scop
 	size_t pos_nb;
 }				t_scop;
 
-typedef struct s_int_tab
-{
-	int		*tab;
-	size_t	size;
-}				t_int_tab;
-
-
 /* vertex_list.c */
 
+t_array	list_to_array(t_list *list);
 t_list		*get_vertex(t_list *vertices, void *struc);
 void	array_to_vertices(char **string,
-		t_vertex_array *to_fill,
+		t_array *to_fill,
 		t_scop *scop);
 
 
@@ -146,7 +137,7 @@ t_list *get_material_by_name(t_list *material, void *str);
 void		parse_obj(const t_func_dic *dic,
 		char *string, t_scop *scop);
 void		iter_obj(char *string, t_scop *scop);
-void		string_to_int_tab(char **split, t_int_tab *int_tab);
+void		string_to_int_tab(char **split, t_array *int_tab);
 
 
 /* obj_set_functions1.c */
@@ -212,6 +203,6 @@ void		print_color(t_color color);
 
 /* draw.c */
 t_vector	*get_all_polygon(t_list *polygons);
-t_vector	*get_position(t_vertex_array *array);
+t_vector	*get_position(t_array *array);
 int			draw(t_scop *scop);
 #endif

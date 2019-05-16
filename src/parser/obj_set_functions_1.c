@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 11:16:26 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 11:30:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/16 12:18:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,3 @@ void	create_materials(char **split, void *struc)
 
 	scop->materials = file_to_materials(split[1]);
 }
-
-

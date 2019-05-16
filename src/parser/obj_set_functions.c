@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:27:39 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/13 16:21:48 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/16 14:31:51 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	use_material(char **split, void *struc)
 
 void	create_polygon(char **split, void *struc)
 {
-	t_int_tab	vertex_indices;
+	t_array	vertex_indices;
 	t_scop		*scop;
 	t_face		polygon;
 	t_list		*block;
@@ -56,10 +56,11 @@ void	create_polygon(char **split, void *struc)
 	{
 		.material = scop->current_material,
 		.smoothing_group = scop->smoothing_group,
+		.indices = vertex_indices,
 	};
 	array_to_vertices(split, &polygon.vertices, scop);
 	block = ft_lstnew(&polygon, sizeof(t_face));
-	scop->pos_nb += polygon.vertices.size;
+	scop->pos_nb += polygon.indices.size;
 	if (!block)
 		ft_exit("BAD ALLOC", EXIT_FAILURE);
 	ft_lstadd(&scop->polygons, block);
