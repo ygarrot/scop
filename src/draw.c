@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/16 12:27:29 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/16 15:11:52 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,45 +81,37 @@ int draw(t_scop *scop)
 	GLFWwindow* window;
 
 	window = init();
-	/* t_vector g_vertex_buffer_data[] = { */
-	/* 	{0.0f,  1.0f, 0.0f,}, */
-	/* 	{1.0f, -1.0f, 0.0f,}, */
-	/* 	{-1.0f, -1.0f, 0.0f}, */
-
-	/* 	{1.0f, 1.0f, 1.0f,}, */
-	/* 		{-1.0f, 1.0f, 1.0f,}, */
-	/* 			{1.0f,-1.0f, 1.0f}, */
-
-	/* }; */
 	GLuint vao = 0;
 	GLuint vbo = 0;
-	/* GLuint ebo = 0; */
+	GLuint ebo = 0;
+
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);
-	/* glGenBuffers(1, &ebo); */
+	glGenBuffers(1, &ebo);
 
-	t_array array = ((t_face*)scop->polygons->content)->vertices;
+	list_to_vector_array(scop->position_list, &scop->positions);
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	/* glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW); */
 	glBufferData(GL_ARRAY_BUFFER,
-			array.size * sizeof(t_vertex),
-			&array.content[0],
+			scop->positions.size * sizeof(t_vector),
+			scop->positions.content,
 			GL_STATIC_DRAW);
-	/* glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo); */
-	/* glBufferData(GL_ELEMENT_ARRAY_BUFFER, */
-	/* 		array.size * sizeof(unsigned int), */
-	/* 		array.vertices, */
-	/* 		GL_STATIC_DRAW); */
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+			scop->indices.size * sizeof(int),
+			scop->indices.content,
+			GL_STATIC_DRAW);
+
 	glVertexAttribPointer(0, 3, GL_FLOAT,
-			GL_TRUE, sizeof(t_vertex), (void*)0);
+			GL_TRUE, sizeof(t_vector), (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT,
-			GL_TRUE, sizeof(t_vertex), (void*)sizeof(t_vector));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 3, GL_FLOAT,
-			GL_TRUE, sizeof(t_vertex), (void*)(2 * sizeof(t_vector)));
-	glEnableVertexAttribArray(2);
+	/* glVertexAttribPointer(1, 3, GL_FLOAT, */
+	/* 		GL_TRUE, sizeof(t_vertex), (void*)sizeof(t_vector)); */
+	/* glEnableVertexAttribArray(1); */
+	/* glVertexAttribPointer(2, 3, GL_FLOAT, */
+	/* 		GL_TRUE, sizeof(t_vertex), (void*)(2 * sizeof(t_vector))); */
+	/* glEnableVertexAttribArray(2); */
 	glBindVertexArray(0);
 
 	GLuint shader_programme;
@@ -132,13 +124,15 @@ int draw(t_scop *scop)
 		// wipe the drawing surface clear
 		glBindVertexArray(vao);
 		// draw points 0-3 from the currently bound VAO with current in-use shader
-		glDrawArrays(GL_TRIANGLES, 0, array.size );
+		glDrawElements(GL_TRIANGLES,
+			   	scop->pos_nb, GL_UNSIGNED_INT, 0);
 		// update other events like input handling 
 		glfwPollEvents();
 		// put the stuff we've been drawing onto the display
 		glfwSwapBuffers(window);
 	}
 	glfwDestroyWindow(window);
+	/* glDelete_ve */
 	glfwTerminate();
 	exit(EXIT_SUCCESS);
 	return 1;

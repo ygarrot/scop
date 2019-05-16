@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/16 13:35:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/16 15:09:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_face
 	int				smoothing_group;
 }				t_face;
 
+void	list_to_vector_array(t_list *vertex, t_array *to_fill);
 typedef struct	s_scop
 {
 	t_array	positions;

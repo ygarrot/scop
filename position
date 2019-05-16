@@ -1,0 +1,25 @@
+./src/draw.c:			scop->positions.size * sizeof(t_vertex),
+./src/draw.c:			scop->positions.content,
+./src/draw.c:			scop->indices.size* sizeof(int),
+./src/draw.c:			scop->indices.content,
+Binary file ./src/list/.vertex_list.c.swp matches
+./src/list/vertex_list.c:	if (!scop->positions.size)
+./src/list/vertex_list.c:		list_to_vector_array(scop->position_list, &scop->positions);
+./src/list/vertex_list.c:		list_to_vector_array(scop->normal_list, &scop->normals);
+./src/list/vertex_list.c:		list_to_vector_array(scop->texture_list, &scop->textures);
+./src/list/vertex_list.c:		((t_vertex*)to_fill->content)[i].position = get_vector(scop->positions, tab[0]);
+./src/list/vertex_list.c:		((t_vertex*)to_fill->content)[i].normal = get_vector(scop->normals, tab[1]);
+./src/list/vertex_list.c:		((t_vertex*)to_fill->content)[i].textures = get_vector(scop->textures, tab[2]);
+./src/parser/obj_set_functions.c:	tmp = ft_lstfilter(scop->materials, split[1], &get_material_by_name);
+./src/parser/obj_set_functions.c:		scop->current_material = (t_material*)tmp->content;
+./src/parser/obj_set_functions.c:		.material = scop->current_material,
+./src/parser/obj_set_functions.c:		.smoothing_group = scop->smoothing_group,
+./src/parser/obj_set_functions.c:	scop->pos_nb += polygon.indices.size;
+./src/parser/obj_set_functions.c:	ft_lstadd(&scop->polygons, block);
+./src/parser/obj_set_functions_1.c:	scop->materials = file_to_materials(split[1]);
+Binary file ./src/print/.obj_print.c.swp matches
+./src/print/obj_print.c:	print_vector_array(scop->positions);
+./src/print/obj_print.c:	print_vector_array(scop->normals);
+./src/print/obj_print.c:	print_vector_array(scop->textures);
+./src/print/obj_print.c:	ft_lstiter(scop->polygons, &print_faces);
+./src/print/obj_print.c:	ft_lstiter(scop->materials, &print_mtls);

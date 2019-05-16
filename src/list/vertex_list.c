@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 12:01:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/16 14:52:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/16 15:12:40 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,15 @@ t_array	list_to_array(t_list *list)
 	{
 		.size = new_size,
 		.content = ft_memalloc(tmp.content_size * new_size),
+		.content_size = sizeof(int),
 	};
 	new_size = 0;
 	while (list)
 	{
 		tmp = (*(t_face*)list->content).indices;
-		/* int *tab = &((int*)ret.content)[new_size]; */
-		/* ft_memcpy(&((int*)ret.content + new_size), */
-		/* 		&tmp.content, */
-		/* 		tmp.size * tmp.content_size); */
-		/* if (!tab) */
-		/* 	return ret; */
 		for (size_t i = 0; i < tmp.size;i++)
 		{
 			((int*)ret.content)[new_size + i] = ((int*)tmp.content)[i];
-			/* printf("%ld :", i); */
-			printf("%d\n", ((int*)tmp.content)[i]);
-			printf("%d\n", ((int*)ret.content)[new_size + i]);
 		}
 		new_size += tmp.size;
 		list = list->next;
