@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:27:39 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/16 14:31:51 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/17 11:57:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	create_vector(char **split, t_list **stack)
 {
-	t_vector	tmp;
+	t_vector3	tmp;
 	t_list		*block;
 
 	if (ft_tablen(split) < 4)
 		ft_exit("vertex < 3", 1);
-	tmp = (t_vector)
+	tmp = (t_vector3)
 	{
 			.x = atof(split[1]),
 			.y = atof(split[2]),
 			.z = atof(split[3]),
 			/* .w = (ft_tablen(split) > 4) ? atof(split[1]) : 1.0 */
 	};
-	block = ft_lstnew(&tmp, sizeof(t_vector));
+	block = ft_lstnew(&tmp, sizeof(t_vector3));
 	if (!block)
 		ft_exit("BAD ALLOC", EXIT_FAILURE);
-	ft_lstadd(stack, block);
+	ft_lstpushback(stack, block);
 }
 
 void	use_material(char **split, void *struc)

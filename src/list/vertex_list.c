@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 12:01:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/16 15:12:40 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/17 11:57:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ t_list	*get_vertex(t_list *vertex, void *struc)
 	/* return (NULL); */
 }
 
-t_vector	*get_position(t_array *array)
+t_vector3	*get_position(t_array *array)
 {
-	t_vector	*ret;
+	t_vector3	*ret;
 	size_t		i;
 
 	i = 0;
-	ret = (t_vector*)ft_memalloc(sizeof(t_vector) * array->size);
+	ret = (t_vector3*)ft_memalloc(sizeof(t_vector3) * array->size);
 	while (i < array->size)
 	{
 		ret[i] = ((t_vertex*)array->content)[i].position;
@@ -81,9 +81,9 @@ t_vector	*get_position(t_array *array)
 	return ret;
 }
 
-t_vector	*get_all_polygon(t_list *polygons)
+t_vector3	*get_all_polygon(t_list *polygons)
 {
-	t_vector *ret;
+	t_vector3 *ret;
 	size_t	i;
 	size_t total;
 
@@ -94,7 +94,7 @@ t_vector	*get_all_polygon(t_list *polygons)
 		total += ((t_face*)tmp->content)->vertices.size;
 		tmp = tmp->next;
 	}
-	ret = (t_vector*)ft_memalloc(sizeof(t_vector) * total);
+	ret = (t_vector3*)ft_memalloc(sizeof(t_vector3) * total);
 	tmp = polygons;
 	i = 0;
 	while (tmp)
@@ -119,12 +119,12 @@ void	list_to_vector_array(t_list *vertex, t_array *to_fill)
 
 	lst_size = ft_lstsize(vertex);
 	to_fill->size = lst_size;
-	to_fill->content = (t_vector*)malloc(lst_size * sizeof(t_vector));
-	to_fill->content_size = sizeof(t_vector);
+	to_fill->content = (t_vector3*)malloc(lst_size * sizeof(t_vector3));
+	to_fill->content_size = sizeof(t_vector3);
 	i = 0;
 	while (i < lst_size)
 	{
-		((t_vector*)to_fill->content)[i] = *((t_vector*)vertex->content);
+		((t_vector3*)to_fill->content)[i] = *((t_vector3*)vertex->content);
 		vertex = vertex->next;
 		++i;
 	}
@@ -144,11 +144,11 @@ void	string_to_index(char *string, int *tab)
 	}
 }
 
-t_vector	get_vector(t_array const tab, size_t index)
+t_vector3	get_vector3(t_array const tab, size_t index)
 {
 	if (index < tab.size)
-		return (((t_vector*)tab.content)[index]);
-	return ((t_vector){0 ,0 , 0});
+		return (((t_vector3*)tab.content)[index]);
+	return ((t_vector3){0 ,0 , 0});
 }
 
 void	array_to_vertices(char **string,
@@ -173,9 +173,9 @@ void	array_to_vertices(char **string,
 	while (i < elements_nb)
 	{
 		string_to_index(string[i], tab);
-		((t_vertex*)to_fill->content)[i].position = get_vector(scop->positions, tab[0]);
-		((t_vertex*)to_fill->content)[i].normal = get_vector(scop->normals, tab[1]);
-		((t_vertex*)to_fill->content)[i].textures = get_vector(scop->textures, tab[2]);
+		((t_vertex*)to_fill->content)[i].position = get_vector3(scop->positions, tab[0]);
+		((t_vertex*)to_fill->content)[i].normal = get_vector3(scop->normals, tab[1]);
+		((t_vertex*)to_fill->content)[i].textures = get_vector3(scop->textures, tab[2]);
 		++i;
 	}
 }

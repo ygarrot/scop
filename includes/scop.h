@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/16 15:09:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/23 17:36:17 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,39 @@ typedef struct	s_func_dic
 	void		(*func)(char **, void *);
 }				t_func_dic;
 
-typedef struct	s_vector
+typedef struct	s_matrix
+{
+	float	**mat;
+	size_t		vert;
+	size_t		hor;
+}				t_matrix;
+
+typedef struct	s_vector4
+{
+	GLfloat	x;
+	GLfloat	y;
+	GLfloat	z;
+	GLfloat	w;
+}				t_vector4;
+
+
+typedef struct	s_vector3
 {
 	GLfloat	x;
 	GLfloat	y;
 	GLfloat	z;
 	/* double	w; */
-}				t_vector;
+}				t_vector3;
 
+typedef struct s_mat4
+{
+	GLfloat		x[4];
+	GLfloat		y[4];
+	GLfloat		z[4];
+	GLfloat		w[4];
+}				t_mat4;
+
+typedef double vector4[4];
 /* struct Vertex */
 /* { */
 /* 	  GLfloat position[3]; */
@@ -64,9 +89,9 @@ typedef struct	s_vector
 /* Vertex vertices[VERTEX_COUNT]; */
 typedef struct	s_vertex
 {
-	t_vector	position;
-	t_vector	normal;
-	t_vector	textures;
+	t_vector3	position;
+	t_vector3	normal;
+	t_vector3	textures;
 }				t_vertex;
 
 typedef struct s_array
@@ -95,7 +120,6 @@ typedef struct s_face
 	int				smoothing_group;
 }				t_face;
 
-void	list_to_vector_array(t_list *vertex, t_array *to_fill);
 typedef struct	s_scop
 {
 	t_array	positions;
@@ -119,6 +143,7 @@ typedef struct	s_scop
 	size_t pos_nb;
 }				t_scop;
 
+void	list_to_vector_array(t_list *vertex, t_array *to_fill);
 /* vertex_list.c */
 
 t_array	list_to_array(t_list *list);
@@ -203,7 +228,7 @@ void		print_mtl(t_material *material);
 void		print_color(t_color color);
 
 /* draw.c */
-t_vector	*get_all_polygon(t_list *polygons);
-t_vector	*get_position(t_array *array);
+t_vector3	*get_all_polygon(t_list *polygons);
+t_vector3	*get_position(t_array *array);
 int			draw(t_scop *scop);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/16 15:11:52 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/17 11:57:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int draw(t_scop *scop)
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER,
-			scop->positions.size * sizeof(t_vector),
+			scop->positions.size * sizeof(t_vector3),
 			scop->positions.content,
 			GL_STATIC_DRAW);
 
@@ -104,13 +104,13 @@ int draw(t_scop *scop)
 			GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT,
-			GL_TRUE, sizeof(t_vector), (void*)0);
+			GL_TRUE, sizeof(t_vector3), (void*)0);
 	glEnableVertexAttribArray(0);
 	/* glVertexAttribPointer(1, 3, GL_FLOAT, */
-	/* 		GL_TRUE, sizeof(t_vertex), (void*)sizeof(t_vector)); */
+	/* 		GL_TRUE, sizeof(t_vertex), (void*)sizeof(t_vector3)); */
 	/* glEnableVertexAttribArray(1); */
 	/* glVertexAttribPointer(2, 3, GL_FLOAT, */
-	/* 		GL_TRUE, sizeof(t_vertex), (void*)(2 * sizeof(t_vector))); */
+	/* 		GL_TRUE, sizeof(t_vertex), (void*)(2 * sizeof(t_vector3))); */
 	/* glEnableVertexAttribArray(2); */
 	glBindVertexArray(0);
 

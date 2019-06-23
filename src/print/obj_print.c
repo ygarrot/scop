@@ -6,13 +6,13 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:42:08 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/16 12:29:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/05/17 11:57:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	print_vector3(t_vector const vector)
+void	print_vector(t_vector3 const vector)
 {
 	printf("\t\tx: % 2.4lf y: % 2.4lf z:% 2.4lf w:% 2.4lf\n",
 			vector.x,
@@ -26,11 +26,11 @@ void	print_vertex(t_vertex	*vertex)
 	if (!vertex)
 		return ;
 	printf("\t position: ");
-	print_vector3(vertex->position);
+	print_vector(vertex->position);
 	printf("\t normal: ");
-	print_vector3(vertex->normal);
+	print_vector(vertex->normal);
 	printf("\t texture: ");
-	print_vector3(vertex->textures);
+	print_vector(vertex->textures);
 }
 
 void	print_vertices(t_list *vertex)
@@ -45,7 +45,7 @@ void	print_vector_array(t_array const array)
 	i = 0;
 	while (i < array.size)
 	{
-		print_vector3(((t_vector*)array.content)[i]);
+		print_vector(((t_vector3*)array.content)[i]);
 		++i;
 	}
 }
