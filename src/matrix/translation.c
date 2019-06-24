@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:43:48 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/23 17:27:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/24 15:46:47 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,40 +52,38 @@ float *matrix_sub(float *matrix,
 	return (ret);
 }
 
-void mul_hor(
-		float *matrix1,
-		float *matrix2,
-		size_t vert,
-		size_t hor)
+t_matrix	new_matrix(size_t row, size_t column)
 {
+	t_matrix ret;
 
+	ret.mat = ft_memalloc(row * sizeof(float**));
+	while (row)
+		ret.mat[row] = ft_memalloc(sizeof(float));
+	return (ret);
 }
 
-float	**matrix_mul(float **matrix1,
-		float **matrix2,
-		size_t vert,
-		size_t hor)
+t_matrix matrix_mul(t_matrix matrix1,
+		t_matrix matrix2
+		)
 {
 	size_t	vert_i;
 	size_t	hor_i;
 	size_t	hor_i2;
-	float	**ret;
-	float	tmp;
+	t_matrix	ret;
 
-	ret = (float*)ft_memalloc(sizeof(float) * vert * 2);
-	while (vert_i < vert)
+	ret = new_matrix(matrix1.row, matrix1.row);
+	while (vert_i < matrix1.row)
 	{
 		hor_i = 0;
-		while (hor_i < hor)
+		while (hor_i < matrix1.col)
 		{
-			tmp = 0;
 			hor_i2 = 0;
-			while (hor_i2 < hor)
+			while (hor_i2 < matrix1.col)
 			{
-				tmp += matrix1[vert_i][hor_i2] * matrix2[hor_i2][hor_i];
+				ret.mat[vert_i][hor_i] +=
+			matrix1.mat[vert_i][hor_i2] * matrix2.mat[hor_i2][hor_i];
 				++hor_i2;
 			}
-			ret[vert_i][hor_i] = tmp;
 			++hor_i;
 		}
 		++vert_i;

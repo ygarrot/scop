@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/23 17:36:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/24 15:44:13 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ typedef struct	s_func_dic
 
 typedef struct	s_matrix
 {
+	size_t		row;
+	size_t		col;
 	float	**mat;
-	size_t		vert;
-	size_t		hor;
 }				t_matrix;
 
 typedef struct	s_vector4
