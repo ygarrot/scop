@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 17:27:54 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/24 18:16:12 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/25 13:26:31 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,73 +16,74 @@ typedef unsigned long size_t;
 
 typedef struct	s_matrix
 {
-	size_t		row;
-	size_t		col;
-	float	**mat;
+	int		row;
+	int		col;
+	float		**mat;
 }				t_matrix;
 
-
-t_matrix	new_matrix(size_t row, size_t column)
+t_matrix	new_matrix(const int row, const int column)
 {
 	t_matrix	ret;
 
-	ret.mat = (float**)ft_memalloc((row + 1) * sizeof(float*));
-	ret.row = row;
+	if (!(ret.mat = (float**)ft_memalloc((row + 1) * sizeof(float*))))
+		return (ret);
+	ret.row = -1;
 	ret.col = column;
-	row = 0;
-	while (row < ret.row)
-		ret.mat[row++] = (float*)ft_memalloc(column * sizeof(float));
+	while (++ret.row < row)
+		ret.mat[ret.row] = (float*)ft_memalloc(column * sizeof(float));//FIXME check malloc
+	return (ret);
+}
+
+void	print_matrix(const t_matrix mat)
+{
+	int	row;
+	int	col;
+
+	row = -1;
+	while (++row < mat.row)
+	{
+		col = -1;
+		while (++col < mat.col)
+			printf("[%.2f] ", mat.mat[row][col]);
+		printf("\n");
+	}
+}
+
+t_matrix matrix_sub(const t_matrix matrix, const t_matrix matrix2)
+{
+	t_matrix	ret;
+	int			row;
+	int			col;
+
+	ret = new_matrix(matrix.row, matrix.col);
+	row = -1;
+	while (++row < ret.row)
+	{
+		col = -1;
+		while (++col < ret.col)
+			ret.mat[row][col] = matrix.mat[row][col] - matrix2.mat[row][col];
+	}
 	return (ret);
 }
 
 
-t_matrix matrix_mul(t_matrix matrix1,
-		t_matrix matrix2
-		)
-{
-	size_t	vert_i;
-	size_t	hor_i;
-	size_t	hor_i2;
-	t_matrix	ret;
-
-	vert_i = 0;
-	ret = new_matrix(matrix1.row, matrix1.row);
-	while (vert_i < matrix1.row)
-	{
-		hor_i = 0;
-		while (hor_i < matrix1.col)
-		{
-			hor_i2 = 0;
-			while (hor_i2 < matrix1.col)
-			{
-				ret.mat[vert_i][hor_i] +=
-			matrix1.mat[vert_i][hor_i] * matrix2.mat[hor_i2][hor_i];
-				++hor_i2;
-			}
-			printf("%f\n",ret.mat[vert_i][hor_i] ); 
-			++hor_i;
-		}
-		++vert_i;
-	}
-	return ret;
-}
-
 int main()
 {
 	t_matrix t = new_matrix(4, 4);
-	t_matrix t2;
+	t_matrix t2 = new_matrix(4, 4);
 	t_matrix t3;
-	float **test;
 
-	test = t.mat;
 	t.mat[0][0] = 3;
 	t.mat[0][1] = 2;
 	t.mat[0][2] = 4;
 	t.mat[0][3] = 3;
-	t2 = t;
 	t3 = t;
+	t2.mat[0][0] = 1.2;
+	t2.mat[0][1] = 1;
+	t2.mat[0][2] = 1;
+	t2.mat[0][3] = 1;
 	
 /* float mat3 */
-	matrix_mul(t2, t3);
+	print_matrix(matrix_sub(t2, t3));
 	return 1;
 }

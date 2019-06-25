@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/24 15:44:13 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/25 13:16:44 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ typedef struct	s_func_dic
 
 typedef struct	s_matrix
 {
-	size_t		row;
-	size_t		col;
-	float	**mat;
+	int		row;
+	int		col;
+	float		**mat;
 }				t_matrix;
 
 typedef struct	s_vector4
@@ -231,4 +231,8 @@ void		print_color(t_color color);
 t_vector3	*get_all_polygon(t_list *polygons);
 t_vector3	*get_position(t_array *array);
 int			draw(t_scop *scop);
+t_matrix	new_matrix(const int row, const int column);
+t_matrix matrix_add(const t_matrix matrix, const t_matrix matrix2);
+t_matrix matrix_sub(const t_matrix matrix, const t_matrix matrix2);
+t_matrix matrix_mul(const t_matrix matrix1, const t_matrix matrix2);
 #endif
