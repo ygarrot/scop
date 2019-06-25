@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/25 13:16:44 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/25 13:46:23 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,4 +235,6 @@ t_matrix	new_matrix(const int row, const int column);
 t_matrix matrix_add(const t_matrix matrix, const t_matrix matrix2);
 t_matrix matrix_sub(const t_matrix matrix, const t_matrix matrix2);
 t_matrix matrix_mul(const t_matrix matrix1, const t_matrix matrix2);
+t_matrix	matrix_transpose(const t_matrix matrix);
+void	print_matrix(const t_matrix mat);
 #endif

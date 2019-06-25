@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/05/13 13:12:26 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/06/25 13:56:39 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,10 @@ SRC = \
 	  parser/obj_set_functions.c\
 	  parser/obj_set_functions_1.c\
 	  print/mtl_print.c\
+	  matrix/print.c\
+	  matrix/basics.c\
+	  matrix/transpose.c\
+	  matrix/init.c\
 	  print/obj_print.c
 
 #Colors

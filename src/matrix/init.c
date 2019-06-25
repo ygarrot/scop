@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:15:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/25 13:23:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/25 15:03:38 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,23 @@ t_matrix	new_matrix(const int row, const int column)
 	ret.row = -1;
 	ret.col = column;
 	while (++ret.row < row)
-		ret.mat[row] = (float*)ft_memalloc(column * sizeof(float));//FIXME check malloc
+		ret.mat[ret.row] = (float*)ft_memalloc(column * sizeof(float));//FIXME check malloc
 	return (ret);
 }
 
-/* t_mat4	matrix_identity(void) */
-/* { */
-/* 	return (t_mat4){ */
-/* 		1, 0, 0, 0, */
-/* 		0, 1, 0, 0, */
-/* 		0, 0, 1, 0, */
-/* 		0, 0, 0, 1, */
-/* 	}; */
-/* } */
-
 t_matrix	matrix_identity(const int row, const int col)
 {
-	int	row;
+	int	tmp;
 	t_matrix	ret;
 
-	ret = new_matrix(row, column);
-	while (++row < ret.row)
-		ret.mat[row][row] = 1;
+	tmp = 0;
+	ret = new_matrix(row, col);
+	while (++tmp < ret.row)
+		ret.mat[tmp][tmp] = 1;
+	return (ret);
 }
+
+/* float	*matrix_to_array(const t_matrix matrix) */
+/* { */
+	
+/* } */

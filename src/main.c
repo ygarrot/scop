@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:44:13 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/17 11:57:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/25 14:00:10 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ int main(int argc, const char *argv[])
 	}
 	scop.indices = list_to_array(scop.polygons);
 	/* print_obj(&scop); */
-	draw(&scop);
+	//draw(&scop);
+	t_matrix t = new_matrix(4, 4);
+	t_matrix t2 = new_matrix(4, 4);
+	t_matrix t3;
+
+	t.mat[0][0] = 3;
+	t.mat[0][1] = 2;
+	t.mat[0][2] = 4;
+	t.mat[0][3] = 3;
+	t3 = t;
+	t2.mat[0][0] = 1.2;
+	t2.mat[0][1] = 1;
+	t2.mat[0][2] = 1;
+	t2.mat[0][3] = 1;
+	
+/* float mat3 */
+	print_matrix(matrix_transpose(t2));
+
 	return (0);
 }
