@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 13:10:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/17 13:16:49 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/26 16:37:54 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /* 		    Qr =  ( Qr.scalar, -Qr.vector ) */
 
 
-void	quaternion_conjugate(t_vector4 *qr, t_vector4 const *qa)
+void	quaternion_conjugate(t_quat *qr, t_quat const *qa)
 {
 	qr->w =  qa->w;
 	qr->x = -qa->x;
@@ -43,7 +43,7 @@ void	quaternion_conjugate(t_vector4 *qr, t_vector4 const *qa)
 
 /* ------------------------------------------------------------------- */
 
-float quaternion_magnitude(t_vector4 *qa)
+float quaternion_magnitude(t_quat *qa)
 {
 	return (sqrt(
 				qa->w * qa->w
@@ -52,3 +52,4 @@ float quaternion_magnitude(t_vector4 *qa)
 				+ qa->z * qa->z
 				));
 }
+

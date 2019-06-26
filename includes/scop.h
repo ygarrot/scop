@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/25 13:46:23 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/26 15:27:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct	s_vector4
 	GLfloat	w;
 }				t_vector4;
 
+typedef t_vector4 t_quat;
 
 typedef struct	s_vector3
 {

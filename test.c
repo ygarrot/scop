@@ -26,6 +26,7 @@ int main(void)
 	}
 	glfwMakeContextCurrent(window);
 	glfwSetKeyCallback(window, key_callback);
+	 glRotatef(90.0, 0.0, 1.0, 0.0);
 	
 	/* float vertices[] = {-0.5, -0.5, -1.0,   0.0, 0.5, -1.0,   0.5, -0.5, -1.0}; */
 	/* t_vector tmp = {.x = 2 ,.y =2 ,.z=2 } ; */
