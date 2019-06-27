@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:15:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/25 15:53:20 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/27 13:07:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_matrix	new_matrix(const int row, const int column)
 	return (ret);
 }
 
-t_matrix	matrix_identity(const int row, const int col)
+t_matrix	identity_matrix(const int row, const int col)
 {
 	int	tmp;
 	t_matrix	ret;

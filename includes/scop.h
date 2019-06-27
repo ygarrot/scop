@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/26 15:27:49 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/27 13:44:27 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@
 # define GLFW_DLL
 # include </Users/ygarrot/.brew/Cellar/glfw/3.3/include/GLFW/glfw3.h>
 # include "../libft/includes/libft.h"
+
+typedef struct s_euler_to_mat
+{
+	float		a;
+	float		b;
+	float		c;
+	float		d;
+	float		e;
+	float		f;
+
+	float		ad;
+	float		bd;
+}				t_euler_to_mat;
 
 typedef struct s_color
 {
@@ -237,5 +250,6 @@ t_matrix matrix_add(const t_matrix matrix, const t_matrix matrix2);
 t_matrix matrix_sub(const t_matrix matrix, const t_matrix matrix2);
 t_matrix matrix_mul(const t_matrix matrix1, const t_matrix matrix2);
 t_matrix	matrix_transpose(const t_matrix matrix);
+t_matrix	identity_matrix(const int row, const int col);
 void	print_matrix(const t_matrix mat);
 #endif

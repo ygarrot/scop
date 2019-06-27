@@ -6,7 +6,7 @@
 /*   B.y : .y garrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 14:59:11 b.y  .y garrot           #+#    #+#             */
-/*   Updated: 2019/06/26 16:52:49 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/26 16:57:45 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ t_quat quat_column_0(t_matrix mat, float trace)
 	s  = sqrt(1.0 + mat.mat[0][0] - mat.mat[1][1] - mat.mat[2][2]) * 2;
 	return (t_quat){
 		.x  = 0.25 * s,
-			.y = (mat.mat[1][0] + mat.mat[0][1]) / s,
-			.z = (mat.mat[0][2] + mat.mat[2][0]) / s,
-			.w = (mat.mat[2][1] - mat.mat[1][2]) / s,
+		.y = (mat.mat[1][0] + mat.mat[0][1]) / s,
+		.z = (mat.mat[0][2] + mat.mat[2][0]) / s,
+		.w = (mat.mat[2][1] - mat.mat[1][2]) / s,
 	};
 }
 
@@ -59,10 +59,10 @@ t_quat quat_column_1(t_matrix mat, float trace)
 
 	s = sqrt(1.0 + mat.mat[1][1] - mat.mat[0][0] - mat.mat[2][2]) * 2;
 	return (t_quat){
-		.x  = (mat.mat[1][0] + mat.mat[0][1]) / s,
-			.y = 0.25 * s,
-			.z = (mat.mat[2][1] + mat.mat[1][2]) / s,
-			.w = (mat.mat[0][2] - mat.mat[2][0]) / s,
+		.x = (mat.mat[1][0] + mat.mat[0][1]) / s,
+		.y = 0.25 * s,
+		.z = (mat.mat[2][1] + mat.mat[1][2]) / s,
+		.w = (mat.mat[0][2] - mat.mat[2][0]) / s,
 	};
 }
 
@@ -73,9 +73,9 @@ t_quat quat_column_2(t_matrix mat, float trace)
 	s  = sqrt(1.0 + mat.mat[2][2] - mat.mat[0][0] - mat.mat[1][2]) * 2;
 	return (t_quat){
 		.x = (mat.mat[0][2] + mat.mat[2][0]) / s,
-			.y = (mat.mat[2][1] +mat.mat[1][2]) / s,
-			.z = 0.25 * s,
-			.w = (mat.mat[0][1] - mat.mat[0][1]) / s,
+		.y = (mat.mat[2][1] + mat.mat[1][2]) / s,
+		.z = 0.25 * s,
+		.w = (mat.mat[1][0] - mat.mat[0][1]) / s,
 	};
 }
 
@@ -101,7 +101,7 @@ t_quat matrix_to_quaternion(t_matrix mat)
 		return default_case(mat, trace);
 	if (mat.mat[0][0] > mat.mat[1][2] && mat.mat[0][0] > mat.mat[2][2])
 		return quat_column_0(mat, trace);
-	 else if (mat.mat[1][2] > mat.mat[2][2] )
+	 else if (mat.mat[1][1] > mat.mat[2][2])
 		return quat_column_0(mat, trace);
 	return quat_column_0(mat, trace);
 }
