@@ -6,53 +6,112 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/27 13:56:31 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/29 16:07:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+void processInput(GLFWwindow *window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		printf("tesT");
+		glfwSetWindowShouldClose(window, true);
+	}
+}
 
 /* static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) */
 /* { */
 /* 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) */
 /* 		glfwSetWindowShouldClose(window, GL_TRUE); */
 /* } */
-/* static void error_callback(int error, const char* description) */
-/* { */
-/* 	fputs(description, stderr); */
-/* } */
+
+static void error_callback(int error, const char *description)
+{
+	(void)error;
+	fputs(description, stderr);
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	(void)window;
+	glViewport(0, 0, width, height);
+}
+
+void	check_link(int shader)
+{
+	int  success;
+	char infoLog[512];
+
+	glGetShaderiv(shader, GL_LINK_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(shader, 512, NULL, infoLog);
+		printf("ERROR::SHADER::VERTEX::LINK_FAILED %s\n" ,infoLog);
+	}
+	else
+		printf("SHADER::VERTEX::LINK_DONE\n");
+}
+
+void	check_compile(int shader)
+{
+	int  success;
+	char infoLog[512];
+
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(shader, 512, NULL, infoLog);
+		printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED %s\n" ,infoLog);
+	}
+	else
+		printf("SHADER::VERTEX::COMPILATION_DONE\n");
+}
+
 void	set_tmp_textures(GLuint *shader_programme)
 {
-
-	const char* vertex_shader =
+	GLuint vertex_shader;
+	GLuint fragment_shader;
+	const char* vertex_shader_src =
 		"#version 400\n"
 		"in vec3 vp;"
 		"void main() {"
 		"  gl_Position = vec4(vp, 1.0);"
 		"}";
-	const char* fragment_shader =
+	const char* fragment_shader_src =
 		"#version 400\n"
 		"out vec4 frag_colour;"
 		"void main() {"
 		"  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);"
 		"}";
-	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vs, 1, &vertex_shader, NULL);
-	glCompileShader(vs);
-	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fs, 1, &fragment_shader, NULL);
-	glCompileShader(fs);
-	*shader_programme = glCreateProgram();
-	glAttachShader(*shader_programme, fs);
-	glAttachShader(*shader_programme, vs);
-	glLinkProgram(*shader_programme);
 
+	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertex_shader, 1, &vertex_shader_src, NULL);
+	glCompileShader(vertex_shader);
+	check_compile(vertex_shader);
+
+	fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragment_shader, 1, &fragment_shader_src, NULL);
+	glCompileShader(fragment_shader);
+	check_compile(fragment_shader);
+
+	*shader_programme = glCreateProgram();
+
+	glAttachShader(*shader_programme, fragment_shader);
+	glAttachShader(*shader_programme, vertex_shader);
+	glLinkProgram(*shader_programme);
+	glDeleteShader(fragment_shader);
+	glDeleteShader(vertex_shader);
 }
 
-GLFWwindow	*init()
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
+
+GLFWwindow	*init_window()
 {
 	GLFWwindow* window;
-	/* glfwSetErrorCallback(error_callback); */
+	glfwSetErrorCallback(error_callback);
 	if (!glfwInit())
 	{
 		exit(EXIT_FAILURE);
@@ -63,41 +122,47 @@ GLFWwindow	*init()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow( 1024, 768, "Tutorial 01", NULL, NULL);
+	window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "scop", NULL, NULL);
 	if (!window)
 		return 0;
+	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	glfwMakeContextCurrent(window);
-	glewExperimental=true; // Nécessaire dans le profil de base
-	if (glewInit() != GLEW_OK) {
+	glewExperimental = true; // Nécessaire dans le profil de base
+	if (glewInit() != GLEW_OK)
+	{
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		return 0;
 	}
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	return window;
 }
 
 int draw(t_scop *scop)
 {
-	(void)scop;
+	GLuint shader_programme;
 	GLFWwindow* window;
 
-	window = init();
+	window = init_window();
 	GLuint vao = 0;
 	GLuint vbo = 0;
 	GLuint ebo = 0;
 
 	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
 	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
 	glGenBuffers(1, &ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
 	list_to_vector_array(scop->position_list, &scop->positions);
-	glBindVertexArray(vao);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
 	glBufferData(GL_ARRAY_BUFFER,
 			scop->positions.size * sizeof(t_vector3),
 			scop->positions.content,
 			GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
 			scop->indices.size * sizeof(int),
 			scop->indices.content,
@@ -105,35 +170,38 @@ int draw(t_scop *scop)
 
 	glVertexAttribPointer(0, 3, GL_FLOAT,
 			GL_TRUE, sizeof(t_vector3), (void*)0);
+
 	glEnableVertexAttribArray(0);
-	/* glVertexAttribPointer(1, 3, GL_FLOAT, */
-	/* 		GL_TRUE, sizeof(t_vertex), (void*)sizeof(t_vector3)); */
-	/* glEnableVertexAttribArray(1); */
-	/* glVertexAttribPointer(2, 3, GL_FLOAT, */
-	/* 		GL_TRUE, sizeof(t_vertex), (void*)(2 * sizeof(t_vector3))); */
-	/* glEnableVertexAttribArray(2); */
 	glBindVertexArray(0);
 
-	GLuint shader_programme;
 	set_tmp_textures(&shader_programme);
+	/* glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); */
+
+	/* print_obj(scop); */
 
 	while (1)
 	{
+		processInput(window);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		glUseProgram(shader_programme);
 		// wipe the drawing surface clear
 		glBindVertexArray(vao);
-		// draw points 0-3 from the currently bound VAO with current in-use shader
 		glDrawElements(GL_TRIANGLES,
-			   	scop->pos_nb, GL_UNSIGNED_INT, 0);
-		// update other events like input handling 
-		glfwPollEvents();
+				scop->pos_nb, GL_UNSIGNED_INT, 0);
 		// put the stuff we've been drawing onto the display
 		glfwSwapBuffers(window);
+		// update other events like input handling 
+		glfwPollEvents();
 	}
 	glfwDestroyWindow(window);
-	/* glDelete_ve */
+
+	glDeleteVertexArrays(1, &vao);
+	glDeleteBuffers(1, &vbo);
+	glDeleteBuffers(1, &ebo);
 	glfwTerminate();
+
 	exit(EXIT_SUCCESS);
 	return 1;
 }

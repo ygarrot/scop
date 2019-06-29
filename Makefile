@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/06/25 13:56:39 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/06/29 15:24:43 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,3 +97,6 @@ fclean: clean
 
 re: fclean
 	make all
+
+exec: all
+	./scop resources/42.obj
