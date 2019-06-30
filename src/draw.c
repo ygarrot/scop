@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/29 16:07:16 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 15:23:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,16 @@ int draw(t_scop *scop)
 		glUseProgram(shader_programme);
 		// wipe the drawing surface clear
 		glBindVertexArray(vao);
+		// create transformations
+		t_matrix transform = identity_matrix(4, 4);
+		/* transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f)); */
+		t_vector3 tmp = (t_vector3){2, 2, 2};
+		transform = euler_to_rotation_matrix(tmp);
+
+		// get matrix's uniform location and set matrix
+		unsigned int transformLoc = glGetUniformLocation(shader_programme, "transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, matrix_to_array(transform));
+
 		glDrawElements(GL_TRIANGLES,
 				scop->pos_nb, GL_UNSIGNED_INT, 0);
 		// put the stuff we've been drawing onto the display
@@ -201,7 +211,6 @@ int draw(t_scop *scop)
 	glDeleteBuffers(1, &vbo);
 	glDeleteBuffers(1, &ebo);
 	glfwTerminate();
-
 	exit(EXIT_SUCCESS);
 	return 1;
 }

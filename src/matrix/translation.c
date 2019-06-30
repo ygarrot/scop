@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:43:48 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/25 16:00:51 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 14:59:39 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#include "matrix.h"
 t_vector3	translate(t_vector3 *vector, t_vector3 const direction)
 {
 	t_matrix tmp;

@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:15:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/27 13:07:11 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 15:22:14 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#include "matrix.h"
 
 t_matrix	new_matrix(const int row, const int column)
 {
@@ -51,9 +51,25 @@ t_matrix	vector3_to_matrix(t_vector3 vec)
 
 	tmp = new_matrix(1, 3);
 	ft_memcpy(tmp.mat, &vec, sizeof(vec));
-	return tmp;
+	return (tmp);
 }
-/* float	*matrix_to_array(const t_matrix matrix) */
-/* { */
-	
-/* } */
+
+float	*matrix_to_array(const t_matrix matrix)
+{
+	float *array;
+	int		row;
+	int		col;
+
+	if (!(array = ft_memalloc(sizeof(float) * matrix.col * matrix.row)))
+		return (NULL);
+	row = -1;
+	while (++row < matrix.row)
+	{
+		col = -1;
+		while (++col < matrix.col)
+		{
+			array[row * matrix.col + col] = matrix.mat[row][col];
+		}
+	}
+	return array;
+}

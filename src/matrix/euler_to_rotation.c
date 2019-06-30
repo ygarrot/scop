@@ -6,15 +6,15 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 13:32:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/27 13:56:26 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 15:26:47 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#include "matrix.h"
 
 //http://www.opengl-tutorial.org/assets/faq_quaternions/index.html#Q36
 
-static const t_euler_to_mat	generate_tmp(t_vector3 const euler)
+static t_euler_to_mat	generate_tmp(t_vector3 const euler)
 {
 	t_euler_to_mat tmp;
 

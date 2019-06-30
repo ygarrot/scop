@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/06/29 15:24:43 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/06/30 15:33:01 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ FRAMEWORK += -framework OpenGL \
 SRCDIR = src
 OBJDIR = obj
 INCDIR =  \
-		  Users/ygarrot/.brew/Cellar/glew/2.1.0/include/GL \
-		  Users/ygarrot/.brew/Cellar/glfw/3.3/include \
+		  /Users/ygarrot/.brew/Cellar/glew/2.1.0/include/GL \
+		  /Users/ygarrot/.brew/Cellar/glfw/3.3/include \
 		  includes \
 		  libft/includes
 
@@ -47,11 +47,14 @@ SRC = \
 	  parser/obj_set_functions.c\
 	  parser/obj_set_functions_1.c\
 	  print/mtl_print.c\
-	  matrix/print.c\
 	  matrix/basics.c\
-	  matrix/transpose.c\
+	  matrix/euler_to_rotation.c\
 	  matrix/init.c\
+	  matrix/print.c\
+	  matrix/rotation.c\
+	  matrix/transpose.c\
 	  print/obj_print.c
+	  # matrix/translation.c\
 
 #Colors
 

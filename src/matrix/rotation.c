@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:58:32 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/27 13:20:51 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 15:00:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#include "matrix.h"
 
 t_matrix	matrix4_x_rotate(float theta)
 {

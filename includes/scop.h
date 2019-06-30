@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/27 13:44:27 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 15:23:46 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,7 @@
 # define GLFW_DLL
 # include </Users/ygarrot/.brew/Cellar/glfw/3.3/include/GLFW/glfw3.h>
 # include "../libft/includes/libft.h"
-
-typedef struct s_euler_to_mat
-{
-	float		a;
-	float		b;
-	float		c;
-	float		d;
-	float		e;
-	float		f;
-
-	float		ad;
-	float		bd;
-}				t_euler_to_mat;
+#include "matrix.h"
 
 typedef struct s_color
 {
@@ -59,13 +47,6 @@ typedef struct	s_func_dic
 	void		(*func)(char **, void *);
 }				t_func_dic;
 
-typedef struct	s_matrix
-{
-	int		row;
-	int		col;
-	float		**mat;
-}				t_matrix;
-
 typedef struct	s_vector4
 {
 	GLfloat	x;
@@ -75,15 +56,6 @@ typedef struct	s_vector4
 }				t_vector4;
 
 typedef t_vector4 t_quat;
-
-typedef struct	s_vector3
-{
-	GLfloat	x;
-	GLfloat	y;
-	GLfloat	z;
-	/* double	w; */
-}				t_vector3;
-
 typedef struct s_mat4
 {
 	GLfloat		x[4];
@@ -245,11 +217,4 @@ void		print_color(t_color color);
 t_vector3	*get_all_polygon(t_list *polygons);
 t_vector3	*get_position(t_array *array);
 int			draw(t_scop *scop);
-t_matrix	new_matrix(const int row, const int column);
-t_matrix matrix_add(const t_matrix matrix, const t_matrix matrix2);
-t_matrix matrix_sub(const t_matrix matrix, const t_matrix matrix2);
-t_matrix matrix_mul(const t_matrix matrix1, const t_matrix matrix2);
-t_matrix	matrix_transpose(const t_matrix matrix);
-t_matrix	identity_matrix(const int row, const int col);
-void	print_matrix(const t_matrix mat);
 #endif

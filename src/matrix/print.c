@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:23:34 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/25 13:46:27 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 15:00:25 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#include "matrix.h"
 
 void	print_matrix(const t_matrix mat)
 {

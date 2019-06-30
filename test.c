@@ -25,7 +25,7 @@ int main(void)
 	}
 	glfwMakeContextCurrent(window);
 	glfwSetKeyCallback(window, key_callback);
-	 glRotatef(90.0, 0.0, 1.0, 0.0);
+	 /* glRotatef(90.0, 0.0, 1.0, 0.0); */
 	
 	/* float vertices[] = {-0.5, -0.5, -1.0,   0.0, 0.5, -1.0,   0.5, -0.5, -1.0}; */
 	/* t_vector tmp = {.x = 2 ,.y =2 ,.z=2 } ; */
@@ -45,7 +45,7 @@ int main(void)
 		glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
+		glRotatef((float) glfwGetTime() * 50.f, 1.f, 50.f, 1.f);
 
 		glBegin(GL_TRIANGLES);
 		glColor3f(1.f, 0.f, 0.f);
