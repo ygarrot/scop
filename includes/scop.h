@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/30 15:23:46 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 16:22:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct	s_scop
 	size_t pos_nb;
 }				t_scop;
 
+void	print_vector_array(t_array const array);
 void	list_to_vector_array(t_list *vertex, t_array *to_fill);
 /* vertex_list.c */
 

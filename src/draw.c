@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/30 15:23:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/06/30 16:22:12 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,17 @@ void	set_tmp_textures(GLuint *shader_programme)
 	GLuint vertex_shader;
 	GLuint fragment_shader;
 	const char* vertex_shader_src =
-		"#version 400\n"
-		"in vec3 vp;"
-		"void main() {"
-		"  gl_Position = vec4(vp, 1.0);"
-		"}";
+"#version 330 core\
+		layout (location = 0) in vec3 aPos;\
+	layout (location = 1) in vec2 aTexCoord;\
+	out vec2 TexCoord;\
+	uniform mat4 transform;\
+	void main()\
+	{\
+		    gl_Position = transform * vec4(aPos, 1.0f);\
+				TexCoord = vec2(aTexCoord.x, aTexCoord.y);\
+	}\
+	"	;
 	const char* fragment_shader_src =
 		"#version 400\n"
 		"out vec4 frag_colour;"
@@ -157,6 +163,7 @@ int draw(t_scop *scop)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
 	list_to_vector_array(scop->position_list, &scop->positions);
+	print_vector_array(scop->positions);
 
 	glBufferData(GL_ARRAY_BUFFER,
 			scop->positions.size * sizeof(t_vector3),
@@ -179,6 +186,7 @@ int draw(t_scop *scop)
 
 	/* print_obj(scop); */
 
+	int i = 0;
 	while (1)
 	{
 		processInput(window);
@@ -186,17 +194,18 @@ int draw(t_scop *scop)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glUseProgram(shader_programme);
-		// wipe the drawing surface clear
 		glBindVertexArray(vao);
-		// create transformations
-		t_matrix transform = identity_matrix(4, 4);
-		/* transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f)); */
-		t_vector3 tmp = (t_vector3){2, 2, 2};
+
+		t_matrix transform;
+		t_vector3 tmp = (t_vector3){0, 0, i};
+		sleep(1);
+		i++;
 		transform = euler_to_rotation_matrix(tmp);
+		print_matrix(transform);
 
 		// get matrix's uniform location and set matrix
 		unsigned int transformLoc = glGetUniformLocation(shader_programme, "transform");
-		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, matrix_to_array(transform));
+		glUniformMatrix4fv(transformLoc, 1, GL_TRUE, matrix_to_array(transform));
 
 		glDrawElements(GL_TRIANGLES,
 				scop->pos_nb, GL_UNSIGNED_INT, 0);
