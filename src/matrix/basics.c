@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:14:22 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/27 13:10:25 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/18 13:43:53 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,21 @@ t_matrix	matrix_mul(const t_matrix matrix1, const t_matrix matrix2)
 	t_matrix	ret;
 
 	vert_i = -1;
-	ret = new_matrix(matrix1.row, matrix1.row);
+	ret = new_matrix(matrix1.row, matrix2.col);
+	if (matrix1.col != matrix2.row)
+		return (ret);
 	while (++vert_i < matrix1.row)
 	{
 		hor_i = -1;
-		while (++hor_i < matrix1.col)
+		while (++hor_i < matrix2.col)
 		{
 			hor_i2 = -1;
 			while (++hor_i2 < matrix1.col)
 			{
 				ret.mat[vert_i][hor_i] +=
-				matrix1.mat[vert_i][hor_i] * matrix2.mat[hor_i2][hor_i];
+				matrix1.mat[vert_i][hor_i2] * matrix2.mat[hor_i2][hor_i];
 			}
 		}
 	}
-	return ret;
+	return (ret);
 }

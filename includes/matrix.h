@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 14:53:59 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/30 15:23:47 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/18 14:04:43 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct	s_matrix
 	float		**mat;
 }				t_matrix;
 
+/* typedef GLfloat[16] mat4; */
+
 typedef struct	s_vector3
 {
 	float	x;
@@ -65,4 +67,11 @@ t_matrix	matrix4_x_rotate(float theta);
 t_matrix	matrix4_y_rotate(float theta);
 t_matrix	matrix4_z_rotate(float theta);
 t_matrix	matrix_transpose(const t_matrix matrix);
+
+t_matrix	translate(t_matrix *matrix, t_vector3 const direction);
+void set_projection_matrix(t_matrix *mat, const float angle,
+	   	const float near, const float far);
+
+void perspective(const float fov, const float aspect,
+	   	const float near, const float far, t_matrix *mret);
 #endif

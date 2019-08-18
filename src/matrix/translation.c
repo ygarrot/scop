@@ -6,31 +6,17 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:43:48 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/30 14:59:39 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/18 14:15:04 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
-t_vector3	translate(t_vector3 *vector, t_vector3 const direction)
+t_matrix	translate(t_matrix *matrix, t_vector3 const direction)
 {
-	t_matrix tmp;
-	t_matrix matrix  = {
-		1, 0, 0, direction.x,
-		0, 1, 0, direction.y,
-		0, 0, 1, direction.z,
-		0, 0, 0, 1,
-	};
-
-
-	tmp = matrix_mul(matrix, vector3_to_matrix(
-	return 
-	/* tmp = *vector; */
-	/* while (i < 4) */
-	/* { */
-	/* 	tmp.x += matrix.x[i] * vector->x; */
-	/* 	tmp.y += matrix.y[i] * vector->x; */
-	/* 	tmp.z += matrix.z[i] * vector->z; */
-	/* 	/1* tmp.w += matrix.w[i] * 1; *1/ */
-	/* } */
-	return tmp;
+	t_matrix tmp = new_matrix(4, 1);
+	tmp.mat[0][0] = direction.x;
+	tmp.mat[1][0] = direction.y;
+	tmp.mat[2][0] = direction.z;
+	tmp.mat[3][0] = 1;
+	return matrix_mul(*matrix, tmp);
 }

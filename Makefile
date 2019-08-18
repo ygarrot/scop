@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/06/30 15:33:01 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/08/18 13:44:40 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,9 @@ SRC = \
 	  matrix/print.c\
 	  matrix/rotation.c\
 	  matrix/transpose.c\
+	  matrix/projection.c\
+	  matrix/translation.c\
 	  print/obj_print.c
-	  # matrix/translation.c\
 
 #Colors
 

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/08/18 10:55:57 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/18 14:18:23 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,15 @@ void	set_tmp_textures(GLuint *shader_programme)
 		layout (location = 0) in vec3 aPos;\
 	layout (location = 1) in vec2 aTexCoord;\
 	out vec2 TexCoord;\
-	uniform mat4 transform;\
+\
+	uniform mat4 model;\
+	uniform mat4 view;\
+	uniform mat4 projection;\
+\
 	void main()\
 	{\
-		    gl_Position = transform * vec4(aPos, 1.0f);\
-				TexCoord = vec2(aTexCoord.x, aTexCoord.y);\
+		gl_Position =  projection * view * model * vec4(aPos, 1);\
+			TexCoord = vec2(aTexCoord.x, aTexCoord.y);\
 	}\
 	"	;
 	const char* fragment_shader_src =
@@ -172,7 +176,7 @@ int draw(t_scop *scop)
 
 	for (size_t i = 0; i < scop->indices.size; i++)
 	{
-		((int*)scop->indices.content)[i]--;
+		--((int*)scop->indices.content)[i];
 	}
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
 			scop->indices.size * sizeof(int),
@@ -190,7 +194,7 @@ int draw(t_scop *scop)
 
 	/* print_obj(scop); */
 
-	int i = 0;
+	float i = 0;
 	while (1)
 	{
 		processInput(window);
@@ -200,16 +204,26 @@ int draw(t_scop *scop)
 		glUseProgram(shader_programme);
 		glBindVertexArray(vao);
 
-		t_matrix transform;
-		t_vector3 tmp = (t_vector3){0, i, 0};
-		sleep(1);
-		i++;
-		transform = euler_to_rotation_matrix(tmp);
-		print_matrix(transform);
+		t_matrix model = identity_matrix(4, 4);
+		t_matrix view = identity_matrix(4, 4);
+		t_matrix projection = new_matrix(4, 4);
+		perspective(90, 3.0/4.0, 0.1, 100, &projection);
+		/* set_projection_matrix(&projection, 90, 0.1, 100); */
+		/* t_vector3 direction = {0, i, 0}; */
 
-		// get matrix's uniform location and set matrix
-		unsigned int transformLoc = glGetUniformLocation(shader_programme, "transform");
-		glUniformMatrix4fv(transformLoc, 1, GL_TRUE, matrix_to_array(transform));
+		sleep(1);
+		i += 0.1;
+		model = matrix4_y_rotate(i);
+		/* view = translate(&view, direction); */
+		print_matrix(model);
+		print_matrix(projection);
+
+		unsigned int model_loc = glGetUniformLocation(shader_programme, "model");
+		unsigned int view_loc = glGetUniformLocation(shader_programme, "view");
+		unsigned int projection_loc = glGetUniformLocation(shader_programme, "projection");
+		glUniformMatrix4fv(model_loc, 1, GL_TRUE, matrix_to_array(model));
+		glUniformMatrix4fv(view_loc, 1, GL_TRUE, matrix_to_array(view));
+		glUniformMatrix4fv(projection_loc, 1, GL_TRUE, matrix_to_array(projection));
 
 		glDrawElements(GL_TRIANGLES,
 				scop->pos_nb, GL_UNSIGNED_INT, 0);

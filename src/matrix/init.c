@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:15:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/30 15:22:14 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/18 13:11:25 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_matrix	identity_matrix(const int row, const int col)
 	int	tmp;
 	t_matrix	ret;
 
-	tmp = 0;
+	tmp = -1;
 	ret = new_matrix(row, col);
-	while (++tmp < ret.row)
+	while (++tmp < row)
 		ret.mat[tmp][tmp] = 1;
 	return (ret);
 }
@@ -49,8 +49,10 @@ t_matrix	vector3_to_matrix(t_vector3 vec)
 {
 	t_matrix tmp;
 
-	tmp = new_matrix(1, 3);
-	ft_memcpy(tmp.mat, &vec, sizeof(vec));
+	tmp = new_matrix(3, 1);
+	tmp.mat[0][0] = vec.x;
+	tmp.mat[1][0] = vec.y;
+	tmp.mat[2][0] = vec.z;
 	return (tmp);
 }
 
@@ -71,5 +73,5 @@ float	*matrix_to_array(const t_matrix matrix)
 			array[row * matrix.col + col] = matrix.mat[row][col];
 		}
 	}
-	return array;
+	return (array);
 }
