@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/30 16:22:12 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/18 10:55:57 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	set_tmp_textures(GLuint *shader_programme)
 {
 	GLuint vertex_shader;
 	GLuint fragment_shader;
-	const char* vertex_shader_src =
-"#version 330 core\
+	const char *vertex_shader_src =
+	"#version 330 core\
 		layout (location = 0) in vec3 aPos;\
 	layout (location = 1) in vec2 aTexCoord;\
 	out vec2 TexCoord;\
@@ -133,7 +133,7 @@ GLFWwindow	*init_window()
 		return 0;
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	glfwMakeContextCurrent(window);
-	glewExperimental = true; // Nécessaire dans le profil de base
+	glewExperimental = true;
 	if (glewInit() != GLEW_OK)
 	{
 		fprintf(stderr, "Failed to initialize GLEW\n");
@@ -170,6 +170,10 @@ int draw(t_scop *scop)
 			scop->positions.content,
 			GL_STATIC_DRAW);
 
+	for (size_t i = 0; i < scop->indices.size; i++)
+	{
+		((int*)scop->indices.content)[i]--;
+	}
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
 			scop->indices.size * sizeof(int),
 			scop->indices.content,
@@ -197,7 +201,7 @@ int draw(t_scop *scop)
 		glBindVertexArray(vao);
 
 		t_matrix transform;
-		t_vector3 tmp = (t_vector3){0, 0, i};
+		t_vector3 tmp = (t_vector3){0, i, 0};
 		sleep(1);
 		i++;
 		transform = euler_to_rotation_matrix(tmp);
