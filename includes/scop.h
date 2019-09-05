@@ -14,11 +14,12 @@
 # define SCOP_H
 
 # include <math.h>
-# include </Users/ygarrot/.brew/Cellar/glew/2.1.0/include/GL/glew.h>
+# include <GL/glew.h>
 # define GLFW_DLL
-# include </Users/ygarrot/.brew/Cellar/glfw/3.3/include/GLFW/glfw3.h>
+# include <GLFW/glfw3.h>
 # include "../libft/includes/libft.h"
-#include "matrix.h"
+# include <stdio.h>
+# include "matrix.h"
 
 typedef struct s_color
 {
