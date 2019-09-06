@@ -13,6 +13,9 @@
 .PHONY: all $(NAME) clean fclean re
 .SUFFIXES:
 
+# export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
+# export LD_LIBRARY_PATH="/usr/local/lib/"
+# echo $$LD_LIBRARY_PATH
 NAME = scop
 
 CC = gcc
@@ -50,6 +53,7 @@ SRC = \
 	  matrix/transpose.c\
 	  matrix/projection.c\
 	  matrix/translation.c\
+	  shader/shader.c \
 	  print/obj_print.c
 
 #Colors

@@ -219,4 +219,8 @@ void		print_color(t_color color);
 t_vector3	*get_all_polygon(t_list *polygons);
 t_vector3	*get_position(t_array *array);
 int			draw(t_scop *scop);
+
+void	check_link(int shader);
+void	is_shader_compile(int shader);
+void	set_tmp_textures(GLuint *shader_programme);
 #endif
