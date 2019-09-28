@@ -14,9 +14,14 @@
 # define SCOP_H
 
 # include <math.h>
+# ifdef __linux__
 # include <GL/glew.h>
-# define GLFW_DLL
 # include <GLFW/glfw3.h>
+# else
+# include </Users/ygarrot/.brew/Cellar/glew/2.1.0/include/GL/glew.h>
+# include </Users/ygarrot/.brew/Cellar/glfw/3.3/include/GLFW/glfw3.h>
+# endif
+# define GLFW_DLL
 # include "../libft/includes/libft.h"
 # include <stdio.h>
 # include "matrix.h"

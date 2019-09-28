@@ -117,12 +117,8 @@ int draw(t_scop *scop)
 
 	/* print_obj(scop); */
 
-<<<<<<< HEAD
 		printf("%zu\n", scop->pos_nb);
 	float i = 0;
-=======
-	/* float i = 0; */
->>>>>>> c9d20fb5bc0659e58ab12edc97c954a87e92920d
 	while (1)
 	{
 		processInput(window);
@@ -139,7 +135,6 @@ int draw(t_scop *scop)
 		/* set_projection_matrix(&projection, 90, 0.1, 100); */
 		t_vector3 direction = {0, 0, i};
 
-<<<<<<< HEAD
 		sleep(1);
 		i += 0.5;
 		model = matrix4_y_rotate(i);
@@ -159,14 +154,6 @@ int draw(t_scop *scop)
 		print_matrix(view);
 		printf("projection:\n");
 		print_matrix(projection);
-=======
-		/* sleep(1); */
-		/* i += 0.1; */
-		/* model = matrix4_y_rotate(i); */
-		/* view = translate(&view, direction); */
-		/* print_matrix(model); */
-		/* print_matrix(projection); */
->>>>>>> c9d20fb5bc0659e58ab12edc97c954a87e92920d
 
 		unsigned int model_loc = glGetUniformLocation(shader_programme, "model");
 		unsigned int view_loc = glGetUniformLocation(shader_programme, "view");
