@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 11:27:39 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/08/18 10:51:28 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/31 12:49:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	create_polygon(char **split, void *struc)
 		.smoothing_group = scop->smoothing_group,
 		.indices = vertex_indices,
 	};
+	printf("%zu\n", polygon.indices.size);
 	array_to_vertices(split, &polygon.vertices, scop);
 	block = ft_lstnew(&polygon, sizeof(t_face));
 	scop->pos_nb += polygon.indices.size;

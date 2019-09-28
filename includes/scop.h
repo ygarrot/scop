@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/06/30 16:22:07 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/31 12:38:37 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,4 +218,5 @@ void		print_color(t_color color);
 t_vector3	*get_all_polygon(t_list *polygons);
 t_vector3	*get_position(t_array *array);
 int			draw(t_scop *scop);
+void	list_to_float_array(t_list *vertex, t_array *to_fill);
 #endif
