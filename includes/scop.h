@@ -14,11 +14,12 @@
 # define SCOP_H
 
 # include <math.h>
-# include </Users/ygarrot/.brew/Cellar/glew/2.1.0/include/GL/glew.h>
+# include <GL/glew.h>
 # define GLFW_DLL
-# include </Users/ygarrot/.brew/Cellar/glfw/3.3/include/GLFW/glfw3.h>
+# include <GLFW/glfw3.h>
 # include "../libft/includes/libft.h"
-#include "matrix.h"
+# include <stdio.h>
+# include "matrix.h"
 
 typedef struct s_color
 {
@@ -219,4 +220,8 @@ t_vector3	*get_all_polygon(t_list *polygons);
 t_vector3	*get_position(t_array *array);
 int			draw(t_scop *scop);
 void	list_to_float_array(t_list *vertex, t_array *to_fill);
+
+void	check_link(int shader);
+void	is_shader_compile(int shader);
+void	set_tmp_textures(GLuint *shader_programme);
 #endif

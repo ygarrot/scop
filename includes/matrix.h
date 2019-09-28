@@ -14,6 +14,7 @@
 #define MATRIX_H
 
 #include <math.h>
+# include <stdio.h>
 #include "../libft/includes/libft.h"
 
 typedef struct s_euler_to_mat

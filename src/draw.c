@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "scop.h"
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
 
 void processInput(GLFWwindow *window)
 {
@@ -38,82 +40,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	(void)window;
 	glViewport(0, 0, width, height);
 }
-
-void	check_link(int shader)
-{
-	int  success;
-	char infoLog[512];
-
-	glGetShaderiv(shader, GL_LINK_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(shader, 512, NULL, infoLog);
-		printf("ERROR::SHADER::VERTEX::LINK_FAILED %s\n" ,infoLog);
-	}
-	else
-		printf("SHADER::VERTEX::LINK_DONE\n");
-}
-
-void	check_compile(int shader)
-{
-	int  success;
-	char infoLog[512];
-
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(shader, 512, NULL, infoLog);
-		printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED %s\n" ,infoLog);
-	}
-	else
-		printf("SHADER::VERTEX::COMPILATION_DONE\n");
-}
-
-void	set_tmp_textures(GLuint *shader_programme)
-{
-	GLuint vertex_shader;
-	GLuint fragment_shader;
-	const char *vertex_shader_src =
-	"#version 330 core\
-		layout (location = 0) in vec3 aPos;\
-\
-	uniform mat4 model;\
-	uniform mat4 view;\
-	uniform mat4 projection;\
-\
-	void main()\
-	{\
-		gl_Position =  projection * view * model * vec4(aPos, 1);\
-	}\
-	"	;
-	const char* fragment_shader_src =
-		"#version 400\n"
-		"out vec4 frag_colour;"
-		"void main() {"
-		"  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);"
-		"}";
-
-	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex_shader, 1, &vertex_shader_src, NULL);
-	glCompileShader(vertex_shader);
-	check_compile(vertex_shader);
-
-	fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment_shader, 1, &fragment_shader_src, NULL);
-	glCompileShader(fragment_shader);
-	check_compile(fragment_shader);
-
-	*shader_programme = glCreateProgram();
-
-	glAttachShader(*shader_programme, fragment_shader);
-	glAttachShader(*shader_programme, vertex_shader);
-	glLinkProgram(*shader_programme);
-	glDeleteShader(fragment_shader);
-	glDeleteShader(vertex_shader);
-}
-
-#define WINDOW_WIDTH 1024
-#define WINDOW_HEIGHT 768
 
 GLFWwindow	*init_window()
 {
@@ -191,8 +117,12 @@ int draw(t_scop *scop)
 
 	/* print_obj(scop); */
 
+<<<<<<< HEAD
 		printf("%zu\n", scop->pos_nb);
 	float i = 0;
+=======
+	/* float i = 0; */
+>>>>>>> c9d20fb5bc0659e58ab12edc97c954a87e92920d
 	while (1)
 	{
 		processInput(window);
@@ -204,11 +134,12 @@ int draw(t_scop *scop)
 
 		t_matrix model = identity_matrix(4, 4);
 		t_matrix view = identity_matrix(4, 4);
-		t_matrix projection = new_matrix(4, 4);
-		perspective(90, 3.0/4.0, 0.1, 100, &projection);
+		t_matrix projection = identity_matrix(4, 4);
+		/* perspective(90, 3.0/4.0, 0.1, 100, &projection); */
 		/* set_projection_matrix(&projection, 90, 0.1, 100); */
 		t_vector3 direction = {0, 0, i};
 
+<<<<<<< HEAD
 		sleep(1);
 		i += 0.5;
 		model = matrix4_y_rotate(i);
@@ -228,6 +159,14 @@ int draw(t_scop *scop)
 		print_matrix(view);
 		printf("projection:\n");
 		print_matrix(projection);
+=======
+		/* sleep(1); */
+		/* i += 0.1; */
+		/* model = matrix4_y_rotate(i); */
+		/* view = translate(&view, direction); */
+		/* print_matrix(model); */
+		/* print_matrix(projection); */
+>>>>>>> c9d20fb5bc0659e58ab12edc97c954a87e92920d
 
 		unsigned int model_loc = glGetUniformLocation(shader_programme, "model");
 		unsigned int view_loc = glGetUniformLocation(shader_programme, "view");
