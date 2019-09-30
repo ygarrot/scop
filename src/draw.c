@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/08/18 14:18:23 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/31 12:53:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int draw(t_scop *scop)
 	GLuint shader_programme;
 	GLFWwindow* window;
 
+	for (size_t i = 0; i < scop->indices.size; i++)
+	{
+		--((int*)scop->indices.content)[i];
+		/* printf("%d\n", ((int*)scop->indices.content)[i]); */
+	}
 	window = init_window();
 	GLuint vao = 0;
 	GLuint vbo = 0;
@@ -90,17 +95,12 @@ int draw(t_scop *scop)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
 	list_to_vector_array(scop->position_list, &scop->positions);
-	print_vector_array(scop->positions);
-
+	/* print_vector_array(scop->positions); */
 	glBufferData(GL_ARRAY_BUFFER,
 			scop->positions.size * sizeof(t_vector3),
 			scop->positions.content,
 			GL_STATIC_DRAW);
 
-	for (size_t i = 0; i < scop->indices.size; i++)
-	{
-		--((int*)scop->indices.content)[i];
-	}
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
 			scop->indices.size * sizeof(int),
 			scop->indices.content,
@@ -150,6 +150,7 @@ int draw(t_scop *scop)
 		glUniformMatrix4fv(view_loc, 1, GL_TRUE, matrix_to_array(view));
 		glUniformMatrix4fv(projection_loc, 1, GL_TRUE, matrix_to_array(projection));
 
+		glBindVertexArray(vao);
 		glDrawElements(GL_TRIANGLES,
 				scop->pos_nb, GL_UNSIGNED_INT, 0);
 		// put the stuff we've been drawing onto the display

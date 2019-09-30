@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/08/18 13:44:40 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/09/28 12:04:40 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,6 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -g3
 CFLAGS += -fsanitize=address,undefined
-
-ifeq ($(shell uname -s), Linux)
-CFLAGS+= -lGL -lm -lXinerama -lXrandr -lXi -lXcursor -lXxf86vm $(shell pkg-config --static --libs glfw3)
-endif
 
 SRCDIR = src
 OBJDIR = obj
@@ -74,9 +70,7 @@ INCS = $(addprefix -I, $(addsuffix /, $(INCDIR)))
 
 LIBFT = libft/libft.a
 
-LIBFT += /usr/local/lib/libglfw3.a /usr/lib/libGLEW.so
-
-ifeq ($(shell uname -s), Mac)
+ifeq ($(shell uname -s), Darwin)
 FRAMEWORK += -framework OpenGL \
 	-framework CoreVideo \
 	-framework IOKit \
@@ -88,19 +82,24 @@ INCDIR += Users/ygarrot/.brew/Cellar/glew/2.1.0/include/GL \
 		  /Users/ygarrot/.brew/Cellar/glfw/3.3/include
 endif
 
+ifeq ($(shell uname -s), Linux)
+CFLAGS+= -lGL -lm -lXinerama -lXrandr -lXi -lXcursor -lXxf86vm $(shell pkg-config --static --libs glfw3)
+LIBFT += /usr/local/lib/libglfw3.a /usr/lib/libGLEW.so
+endif
+
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(FRAMEWORK) -I $(INCS) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(FRAMEWORK) -I $(INCS) $(LIBFT)
 	@echo "$(_CYAN)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(ALL_OBJ_DIR) || true
 	@printf "                                                          \r"
 	@printf "$(_CYAN)Compiling $@$(_END)\r"
-	$(CC) -o $@ -c $(CFLAGS) $< $(INCS)
+	@$(CC) -o $@ -c $(CFLAGS) $< $(INCS)
 
 clean:
 	@echo "$(_RED)Removed objects (.o) files.$(_END)"

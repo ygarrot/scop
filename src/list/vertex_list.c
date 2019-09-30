@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 12:01:47 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/17 11:57:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/08/31 12:48:27 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_array	list_to_array(t_list *list)
 	while (list)
 	{
 		tmp = (*(t_face*)list->content).indices;
-		for (size_t i = 0; i < tmp.size;i++)
+		for (size_t i = 0; i < tmp.size; i++)
 		{
 			((int*)ret.content)[new_size + i] = ((int*)tmp.content)[i];
 		}
@@ -124,6 +124,7 @@ void	list_to_vector_array(t_list *vertex, t_array *to_fill)
 	i = 0;
 	while (i < lst_size)
 	{
+		
 		((t_vector3*)to_fill->content)[i] = *((t_vector3*)vertex->content);
 		vertex = vertex->next;
 		++i;
