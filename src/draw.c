@@ -113,11 +113,11 @@ int draw(t_scop *scop)
 	glBindVertexArray(0);
 
 	set_tmp_textures(&shader_programme);
-	/* glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); */
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	/* print_obj(scop); */
 
-	/* float i = 0; */
+	float i = 0;
 	while (1)
 	{
 		processInput(window);
@@ -132,12 +132,14 @@ int draw(t_scop *scop)
 		t_matrix projection = identity_matrix(4, 4);
 		/* perspective(90, 3.0/4.0, 0.1, 100, &projection); */
 		/* set_projection_matrix(&projection, 90, 0.1, 100); */
-		/* t_vector3 direction = {0, i, 0}; */
+		t_vector3 direction = {0, 0, i};
+		(void)direction;
 
-		/* sleep(1); */
-		/* i += 0.1; */
-		/* model = matrix4_y_rotate(i); */
+		sleep(1);
+		i += 0.1;
+		/* model = matrix_transpose(matrix4_y_rotate(i)); */
 		/* view = translate(&view, direction); */
+		/* print_matrix(view); */
 		/* print_matrix(model); */
 		/* print_matrix(projection); */
 

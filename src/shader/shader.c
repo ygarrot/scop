@@ -53,7 +53,7 @@ void	set_tmp_textures(GLuint *shader_programme)
 	char *fragment_shader_src;
 
 	vertex_shader_src = read_file("src/shader/vertex_shader");
-	fragment_shader_src =  read_file("src/shader/fragment_shader");
+	fragment_shader_src = read_file("src/shader/fragment_shader");
 	printf("%s %s\n", fragment_shader_src, vertex_shader_src);
 
 	vertex_shader = glCreateShader(GL_VERTEX_SHADER);

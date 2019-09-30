@@ -13,10 +13,13 @@
 #include "matrix.h"
 t_matrix	translate(t_matrix *matrix, t_vector3 const direction)
 {
-	t_matrix tmp = new_matrix(4, 1);
-	tmp.mat[0][0] = direction.x;
-	tmp.mat[1][0] = direction.y;
-	tmp.mat[2][0] = direction.z;
-	tmp.mat[3][0] = 1;
-	return matrix_mul(*matrix, tmp);
+	t_matrix tmp = identity_matrix(4, 4);
+
+	(void)matrix;
+	tmp.mat[0][3] = direction.x;
+	tmp.mat[1][3] = direction.y;
+	tmp.mat[2][3] = direction.z;
+	/* tmp.mat[3][3] = 1; */
+	return (tmp);
+	/* return matrix_mul(*matrix, tmp); */
 }
