@@ -9,6 +9,8 @@ char *read_file(char *file_name)
 	if (fd < 0)
 		return (NULL);
 	buffer = (char*)ft_memalloc(sizeof(char) * BUFF_SIZE + 1);
+	if (buffer == NULL)
+		return (NULL);
 	if (read(fd, buffer, BUFF_SIZE) < 0)
 		return (NULL);
 	buffer[BUFF_SIZE] = 0;
@@ -53,9 +55,11 @@ void	set_tmp_textures(GLuint *shader_programme)
 	char *fragment_shader_src;
 
 	vertex_shader_src = read_file("src/shader/vertex_shader");
-	fragment_shader_src = read_file("src/shader/fragment_shader");
-	printf("%s %s\n", fragment_shader_src, vertex_shader_src);
+	fragment_shader_src = read_file("src//shader/fragment_shader");
 
+	if (!vertex_shader_src || !fragment_shader_src)
+		return ;
+	printf("%s %s\n", fragment_shader_src, vertex_shader_src);
 	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, (const char*const *)&vertex_shader_src, NULL);
 	glCompileShader(vertex_shader);
