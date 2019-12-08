@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 19:14:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/12/08 19:14:54 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/08 19:31:34 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	is_shader_compiled(int shader)
 		printf("SHADER::VERTEX::COMPILATION_DONE\n");
 }
 
-void	set_tmp_textures(GLuint *shader_programme)
+void	set_tmp_textures(GLuint *shader_program)
 {
 	GLuint vertex_shader;
 	GLuint fragment_shader;
@@ -86,11 +86,14 @@ void	set_tmp_textures(GLuint *shader_programme)
 	glCompileShader(fragment_shader);
 	is_shader_compiled(fragment_shader);
 
-	*shader_programme = glCreateProgram();
+	*shader_program = glCreateProgram();
 
-	glAttachShader(*shader_programme, fragment_shader);
-	glAttachShader(*shader_programme, vertex_shader);
-	glLinkProgram(*shader_programme);
+	glAttachShader(*shader_program, fragment_shader);
+	glAttachShader(*shader_program, vertex_shader);
+	glLinkProgram(*shader_program);
 	glDeleteShader(fragment_shader);
 	glDeleteShader(vertex_shader);
+
+	ft_strdel(&vertex_shader_src);
+	ft_strdel(&fragment_shader_src);
 }
