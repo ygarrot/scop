@@ -1,4 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shader.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/08 19:14:19 by ygarrot           #+#    #+#             */
+/*   Updated: 2019/12/08 19:14:54 by ygarrot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scop.h"
+#define VERTEX_SHADER_PATH "vertex_shader"
+#define FRAGMENT_SHADER_PATH "fragment_shader"
 
 char *read_file(char *file_name)
 {
@@ -54,12 +68,14 @@ void	set_tmp_textures(GLuint *shader_programme)
 	char *vertex_shader_src;
 	char *fragment_shader_src;
 
-	vertex_shader_src = read_file("src/shader/vertex_shader");
-	fragment_shader_src = read_file("src//shader/fragment_shader");
+	vertex_shader_src = read_file(VERTEX_SHADER_PATH);
+	fragment_shader_src = read_file(FRAGMENT_SHADER_PATH);
 
 	if (!vertex_shader_src || !fragment_shader_src)
+	{
+		ft_exit("couldn't load shaders\n", EXIT_FAILURE);
 		return ;
-	printf("%s %s\n", fragment_shader_src, vertex_shader_src);
+	}
 	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, (const char*const *)&vertex_shader_src, NULL);
 	glCompileShader(vertex_shader);
