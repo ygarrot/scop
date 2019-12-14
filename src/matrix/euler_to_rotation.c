@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 13:32:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/12/14 15:53:40 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 16:19:20 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_matrix4	euler_to_rotation_matrix(t_vector3 const euler)
 	t_matrix4				matrix;
 
 	tmp = generate_tmp(euler);
+	matrix = identity_matrix4();
+
 	matrix.tab[0][0] = tmp.c * tmp.e;
 	matrix.tab[0][1] = -tmp.c * tmp.f;
 	matrix.tab[0][2] = tmp.d;

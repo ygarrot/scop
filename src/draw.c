@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/12/14 16:06:36 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 16:27:56 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,13 @@ void move_and_rotate(GLuint shader_program)
 
 	sleep(1);
 	i += 0.1;
-	model = matrix4_transpose(matrix4_y_rotate(i));
+	/* model = matrix4_transpose(matrix4_y_rotate(i)); */
 	view = translate(&view, direction);
-	/* print_matrix(view); */
-	/* print_matrix(model); */
-	/* print_matrix(projection); */
+	/* print_matrix4(view); */
+	print_matrix4(model);
+	printf("\n");
+	/* print_matrix4(projection); */
+	/* exit(1); */
 
 	register_mvp_matrix(shader_program, model, view, projection);
 }
