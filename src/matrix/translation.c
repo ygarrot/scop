@@ -6,19 +6,19 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:43:48 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/08/31 11:17:35 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 15:58:43 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
-t_matrix	translate(t_matrix *matrix, t_vector3 const direction)
+t_matrix4	translate(t_matrix4 *matrix, t_vector3 const direction)
 {
-	t_matrix tmp = identity_matrix(4, 4);
+	t_matrix4 tmp = identity_matrix4();
 	(void)matrix;
 	return (tmp);
-	tmp.mat[0][3] = direction.x;
-	tmp.mat[1][3] = direction.y;
-	tmp.mat[2][3] = direction.z;
+	tmp.tab[0][3] = direction.x;
+	tmp.tab[1][3] = direction.y;
+	tmp.tab[2][3] = direction.z;
 	/* tmp.mat[3][3] = 1; */
 	return (tmp);
 }

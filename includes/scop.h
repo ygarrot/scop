@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:59:35 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/08/31 12:38:37 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 16:10:55 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,6 @@ typedef struct	s_vector4
 }				t_vector4;
 
 typedef t_vector4 t_quat;
-typedef struct s_mat4
-{
-	GLfloat		x[4];
-	GLfloat		y[4];
-	GLfloat		z[4];
-	GLfloat		w[4];
-}				t_mat4;
 
 typedef double vector4[4];
 /* struct Vertex */
@@ -77,7 +70,7 @@ typedef double vector4[4];
 /* 	    GLfloat normal[3]; */
 /* 		  Glubyte color[4]; */
 /* }; */
- 
+
 /* Vertex vertices[VERTEX_COUNT]; */
 typedef struct	s_vertex
 {
@@ -141,9 +134,11 @@ void	list_to_vector_array(t_list *vertex, t_array *to_fill);
 
 t_array	list_to_array(t_list *list);
 t_list		*get_vertex(t_list *vertices, void *struc);
-void	array_to_vertices(char **string,
+void	array_to_vertices(
+		char **string,
 		t_array *to_fill,
-		t_scop *scop);
+		t_scop *scop
+		);
 
 
 /* tlist_functions.c */
@@ -153,10 +148,14 @@ t_list *get_material_by_name(t_list *material, void *str);
 
 /* obj_parser.c */
 
-void		parse_obj(const t_func_dic *dic,
-		char *string, t_scop *scop);
 void		iter_obj(char *string, t_scop *scop);
 void		string_to_int_tab(char **split, t_array *int_tab);
+
+void		parse_obj(
+		const t_func_dic *dic,
+		char *string,
+		t_scop *scop
+		);
 
 
 /* obj_set_functions1.c */
@@ -184,16 +183,23 @@ void	print_vertex(t_vertex	*vertex);
 
 /* mtl_parser.c */
 
-void		string_to_double(char **string,
-		double *to_fill);
-t_material	*as_material(void *ptr);
-int			string_to_color(char **string,
-		t_color *to_fill,
-		int color_needed);
 t_list		*file_to_materials(char *filename);
 void		iter_mtl(char *string, t_list **materials);
-void		parse_mtl(const t_func_dic *dic, char *string,
-		t_list **materials);
+t_material	*as_material(void *ptr);
+void		string_to_double(
+		char **string,
+		double *to_fill
+		);
+int			string_to_color(
+		char **string,
+		t_color *to_fill,
+		int color_needed
+		);
+void		parse_mtl(
+		const t_func_dic *dic,
+		char *string,
+		t_list **materials
+		);
 
 
 /* mtl_set_functions_1.c */

@@ -6,72 +6,56 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:15:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/08/18 13:11:25 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 16:11:08 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 
-t_matrix	new_matrix(const int row, const int column)
-{
-	t_matrix	ret;
-
-	if (!(ret.mat = (float**)ft_memalloc((row + 1) * sizeof(float*))))
-		return (ret);
-	ret.row = -1;
-	ret.col = column;
-	while (++ret.row < row)
-		ret.mat[ret.row] = (float*)ft_memalloc(column * sizeof(float));//FIXME check malloc
-	return (ret);
-}
-
-t_matrix	identity_matrix(const int row, const int col)
-{
-	int	tmp;
-	t_matrix	ret;
-
-	tmp = -1;
-	ret = new_matrix(row, col);
-	while (++tmp < row)
-		ret.mat[tmp][tmp] = 1;
-	return (ret);
-}
-
-t_vector3	matrix_to_vector3(t_matrix matrix)
-{
-	t_vector3 tmp;
-
-	ft_memcpy(&tmp, matrix.mat, sizeof(tmp));
-	return (tmp);
-}
-
-t_matrix	vector3_to_matrix(t_vector3 vec)
-{
-	t_matrix tmp;
-
-	tmp = new_matrix(3, 1);
-	tmp.mat[0][0] = vec.x;
-	tmp.mat[1][0] = vec.y;
-	tmp.mat[2][0] = vec.z;
-	return (tmp);
-}
-
-float	*matrix_to_array(const t_matrix matrix)
+float *matrix4_to_array(const t_matrix4 matrix)
 {
 	float *array;
 	int		row;
 	int		col;
 
-	if (!(array = ft_memalloc(sizeof(float) * matrix.col * matrix.row)))
+	if (!(array = ft_memalloc(sizeof(float) * 16)))
 		return (NULL);
 	row = -1;
-	while (++row < matrix.row)
+	while (++row < 4)
 	{
 		col = -1;
-		while (++col < matrix.col)
+		while (++col < 4)
 		{
-			array[row * matrix.col + col] = matrix.mat[row][col];
+			array[row * 4 + col] = matrix.tab[row][col];
 		}
 	}
 	return (array);
 }
+
+t_matrix4	identity_matrix4(void)
+{
+	t_matrix4 matrix;
+
+	ft_bzero(matrix.tab, sizeof(t_mat4));
+	matrix.tab[0][0] = 1;
+	matrix.tab[1][1] = 1;
+	matrix.tab[2][2] = 1;
+	matrix.tab[3][3] = 1;
+	return matrix;
+}
+
+t_matrix4	vector3_to_matrix4(t_vector3 vec)
+{
+	t_matrix4 matrix;
+
+	matrix.tab[0][0] = vec.x;
+	matrix.tab[1][0] = vec.y;
+	matrix.tab[2][0] = vec.z;
+	return matrix;
+}
+
+/* t_vector3	matrix_to_vector3(t_matrix4 matrix) */
+/* { */
+
+/* 	return vector3; */
+/* } */

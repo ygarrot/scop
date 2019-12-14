@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/12/08 19:40:43 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 16:06:36 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,22 @@ void setup_buffer_data(t_scop *scop)
 			GL_TRUE, sizeof(t_vector3), (void*)0);
 }
 
-void register_mvp_matrix(GLuint shader_program, t_matrix model, t_matrix view, t_matrix projection)
+void register_mvp_matrix(GLuint shader_program, t_matrix4 model, t_matrix4 view, t_matrix4 projection)
 {
 	unsigned int model_loc = glGetUniformLocation(shader_program, "model");
 	unsigned int view_loc = glGetUniformLocation(shader_program, "view");
 	unsigned int projection_loc = glGetUniformLocation(shader_program, "projection");
-	glUniformMatrix4fv(model_loc, 1, GL_TRUE, matrix_to_array(model));
-	glUniformMatrix4fv(view_loc, 1, GL_TRUE, matrix_to_array(view));
-	glUniformMatrix4fv(projection_loc, 1, GL_TRUE, matrix_to_array(projection));
+	glUniformMatrix4fv(model_loc, 1, GL_TRUE, matrix4_to_array(model));
+	glUniformMatrix4fv(view_loc, 1, GL_TRUE, matrix4_to_array(view));
+	glUniformMatrix4fv(projection_loc, 1, GL_TRUE, matrix4_to_array(projection));
 }
 
 void move_and_rotate(GLuint shader_program)
 {
 	static float i = 0;
-	t_matrix model = identity_matrix(4, 4);
-	t_matrix view = identity_matrix(4, 4);
-	t_matrix projection = identity_matrix(4, 4);
+	t_matrix4 model = identity_matrix4();
+	t_matrix4 view = identity_matrix4();
+	t_matrix4 projection = identity_matrix4();
 	/* perspective(90, 3.0/4.0, 0.1, 100, &projection); */
 	/* set_projection_matrix(&projection, 90, 0.1, 100); */
 	t_vector3 direction = {0, 0, i};
@@ -121,7 +121,7 @@ void move_and_rotate(GLuint shader_program)
 
 	sleep(1);
 	i += 0.1;
-	model = matrix_transpose(matrix4_y_rotate(i));
+	model = matrix4_transpose(matrix4_y_rotate(i));
 	view = translate(&view, direction);
 	/* print_matrix(view); */
 	/* print_matrix(model); */
