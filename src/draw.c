@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 12:04:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/12/14 16:27:56 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 16:30:03 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,5 @@ int draw(t_scop *scop)
 	glDeleteBuffers(1, &vbo);
 	glDeleteBuffers(1, &ebo);
 	glfwTerminate();
-	exit(EXIT_SUCCESS);
 	return 1;
 }

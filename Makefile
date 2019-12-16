@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2019/09/28 12:04:40 by ygarrot          ###   ########.fr        #
+#    Updated: 2019/12/14 16:40:29 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME = scop
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -g3
-CFLAGS += -fsanitize=address,undefined
+# CFLAGS += -fsanitize=address,undefined
 
 SRCDIR = src
 OBJDIR = obj

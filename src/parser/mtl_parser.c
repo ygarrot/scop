@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 14:39:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/05/17 11:57:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 16:38:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_list		*file_to_materials(char *filename)
 	while (get_next_line(fd, &line))
 	{
 		iter_mtl(line, &materials);
+		ft_strdel(&line);
 	}
 	return (materials);
 }

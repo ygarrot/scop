@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:44:13 by ygarrot           #+#    #+#             */
-/*   Updated: 2019/12/08 19:01:04 by ygarrot          ###   ########.fr       */
+/*   Updated: 2019/12/14 16:42:02 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ int main(int argc, const char *argv[])
 	while (get_next_line(fd, &line))
 	{
 		iter_obj(line, &scop);
+		ft_strdel(&line);
 	}
 	scop.indices = list_to_array(ft_lstreverse(&scop.polygons));
 	draw(&scop);
+
 	return (0);
 }
